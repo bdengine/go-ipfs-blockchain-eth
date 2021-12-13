@@ -69,25 +69,10 @@ func NewApi(configRoot string, peerId string) (*api, error) {
 		return nil, err
 	}
 
-	// todo 检查配置项是否完整
-	if a.Client.HttpUrl == "" || a.Client.SocketUrl == "" {
-		return nil, fmt.Errorf("配置文件Client信息不完整")
-	}
-
-	if a.ContractMap[contractIpfs].ContractAddr == "" || a.ContractMap[contractToken].ContractAddr == "" {
-		return nil, fmt.Errorf("配置文件ContractMap不完整")
-	}
-
-	if a.Chain.ChainId == 0 {
-		return nil, fmt.Errorf("配置文件Chain不完整")
-	}
-
-	if a.Config.RequestTimeout == 0 {
-		return nil, fmt.Errorf("配置文件Config不完整")
-	}
-
-	if a.ID.Pid == "" || a.ID.PriKey == "" {
-		return nil, fmt.Errorf("配置文件ID不完整")
+	// 检查配置项是否完整
+	err = checkConfig(a)
+	if err != nil {
+		return nil, err
 	}
 
 	priKey, err := crypto.HexToECDSA(a.ID.PriKey)
@@ -123,6 +108,29 @@ func NewApi(configRoot string, peerId string) (*api, error) {
 	}
 
 	return &a, err
+}
+
+func checkConfig(a api) error {
+	if a.Client.HttpUrl == "" || a.Client.SocketUrl == "" {
+		return fmt.Errorf("配置文件Client信息不完整")
+	}
+
+	if a.ContractMap[contractIpfs].ContractAddr == "" || a.ContractMap[contractToken].ContractAddr == "" {
+		return fmt.Errorf("配置文件ContractMap不完整")
+	}
+
+	if a.Chain.ChainId == 0 {
+		return fmt.Errorf("配置文件Chain不完整")
+	}
+
+	if a.Config.RequestTimeout == 0 {
+		return fmt.Errorf("配置文件Config不完整")
+	}
+
+	if a.ID.Pid == "" || a.ID.PriKey == "" {
+		return fmt.Errorf("配置文件ID不完整")
+	}
+	return nil
 }
 
 func (a *api) InitPeer(peer model.CorePeer) error {
