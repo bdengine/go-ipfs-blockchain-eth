@@ -1,0 +1,119 @@
+package implement
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/google/uuid"
+	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
+	"github.com/ipfs/go-ipfs-auth/standard/model"
+	"testing"
+)
+
+const (
+	configRoot = "D:/IPFSSTORAGE"
+)
+
+func TestNewApi(t *testing.T) {
+	indent, err := json.MarshalIndent(a, "", "\t")
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(string(indent))
+}
+
+var a *api
+
+func init() {
+	test, err := NewApi(configRoot, "test1")
+	if err != nil {
+		panic(err)
+	}
+	a = test
+}
+
+func TestApi_InitPeer(t *testing.T) {
+	err := a.InitPeer(model.CorePeer{
+		PeerId:    a.ID.Pid,
+		Addresses: []string{"address1", "address2"},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = a.RemovePeer(a.ID.Pid)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestApi_RemovePeer(t *testing.T) {
+	err := a.RemovePeer(a.ID.Pid)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestEvent(t *testing.T) {
+	_, contract, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sch := make(chan *ipfs.ContractsSuccess)
+	sub, err := contract.WatchSuccess(nil, sch, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sub.Unsubscribe()
+	for {
+		select {
+		case success := <-sch:
+			fmt.Println("成功事件触发")
+			fmt.Println(success)
+		}
+	}
+}
+
+func TestClientEvent(t *testing.T) {
+	client, _, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sch := make(chan types.Log)
+	query := ethereum.FilterQuery{}
+	sub, err := client.SubscribeFilterLogs(context.TODO(), query, sch)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sub.Unsubscribe()
+	for {
+		select {
+		case success := <-sch:
+			fmt.Println("成功事件触发")
+			fmt.Println(success)
+		}
+	}
+}
+
+func TestApi_AddFile(t *testing.T) {
+	cid := "testFile1"
+	err := a.AddFile(model.IpfsFileInfo{
+		Cid: cid,
+		Uid: uuid.New().String(),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = a.DeleteFile(cid)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestApi_RemoveFile(t *testing.T) {
+	err := a.DeleteFile("testFile1")
+	if err != nil {
+		t.Fatal(err)
+	}
+}
