@@ -186,6 +186,42 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "pid",
+				"type": "string"
+			}
+		],
+		"name": "getPeerByPid",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "PeerId",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "AddressList",
+						"type": "string[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "valid",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct IPFS.Peer",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "num",
 				"type": "uint256"

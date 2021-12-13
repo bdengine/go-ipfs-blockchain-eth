@@ -35,113 +35,113 @@ type IPFSPeer struct {
 	Valid       bool
 }
 
-// ContractsMetaData contains all meta data concerning the Contracts contract.
-var ContractsMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"Success\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"SetOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"SetPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"SetToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"_peer\",\"type\":\"tuple\"}],\"name\":\"addPeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrPeerMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"fileMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireBlock\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getPeerList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"head\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"peerHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"peerList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peerNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"pidAddrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"removeFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"removePeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"updateAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+// IpfsMetaData contains all meta data concerning the Ipfs contract.
+var IpfsMetaData = &bind.MetaData{
+	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"Success\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"SetOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"SetPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"SetToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"_peer\",\"type\":\"tuple\"}],\"name\":\"addPeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrPeerMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"fileMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireBlock\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"pid\",\"type\":\"string\"}],\"name\":\"getPeerByPid\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getPeerList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"head\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"peerHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"peerList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peerNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"pidAddrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"removeFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"removePeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"updateAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
-// ContractsABI is the input ABI used to generate the binding from.
-// Deprecated: Use ContractsMetaData.ABI instead.
-var ContractsABI = ContractsMetaData.ABI
+// IpfsABI is the input ABI used to generate the binding from.
+// Deprecated: Use IpfsMetaData.ABI instead.
+var IpfsABI = IpfsMetaData.ABI
 
-// Contracts is an auto generated Go binding around an Ethereum contract.
-type Contracts struct {
-	ContractsCaller     // Read-only binding to the contract
-	ContractsTransactor // Write-only binding to the contract
-	ContractsFilterer   // Log filterer for contract events
+// Ipfs is an auto generated Go binding around an Ethereum contract.
+type Ipfs struct {
+	IpfsCaller     // Read-only binding to the contract
+	IpfsTransactor // Write-only binding to the contract
+	IpfsFilterer   // Log filterer for contract events
 }
 
-// ContractsCaller is an auto generated read-only Go binding around an Ethereum contract.
-type ContractsCaller struct {
+// IpfsCaller is an auto generated read-only Go binding around an Ethereum contract.
+type IpfsCaller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractsTransactor is an auto generated write-only Go binding around an Ethereum contract.
-type ContractsTransactor struct {
+// IpfsTransactor is an auto generated write-only Go binding around an Ethereum contract.
+type IpfsTransactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractsFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
-type ContractsFilterer struct {
+// IpfsFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
+type IpfsFilterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractsSession is an auto generated Go binding around an Ethereum contract,
+// IpfsSession is an auto generated Go binding around an Ethereum contract,
 // with pre-set call and transact options.
-type ContractsSession struct {
-	Contract     *Contracts        // Generic contract binding to set the session for
+type IpfsSession struct {
+	Contract     *Ipfs             // Generic contract binding to set the session for
 	CallOpts     bind.CallOpts     // Call options to use throughout this session
 	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// ContractsCallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// IpfsCallerSession is an auto generated read-only Go binding around an Ethereum contract,
 // with pre-set call options.
-type ContractsCallerSession struct {
-	Contract *ContractsCaller // Generic contract caller binding to set the session for
-	CallOpts bind.CallOpts    // Call options to use throughout this session
+type IpfsCallerSession struct {
+	Contract *IpfsCaller   // Generic contract caller binding to set the session for
+	CallOpts bind.CallOpts // Call options to use throughout this session
 }
 
-// ContractsTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// IpfsTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
 // with pre-set transact options.
-type ContractsTransactorSession struct {
-	Contract     *ContractsTransactor // Generic contract transactor binding to set the session for
-	TransactOpts bind.TransactOpts    // Transaction auth options to use throughout this session
+type IpfsTransactorSession struct {
+	Contract     *IpfsTransactor   // Generic contract transactor binding to set the session for
+	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// ContractsRaw is an auto generated low-level Go binding around an Ethereum contract.
-type ContractsRaw struct {
-	Contract *Contracts // Generic contract binding to access the raw methods on
+// IpfsRaw is an auto generated low-level Go binding around an Ethereum contract.
+type IpfsRaw struct {
+	Contract *Ipfs // Generic contract binding to access the raw methods on
 }
 
-// ContractsCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
-type ContractsCallerRaw struct {
-	Contract *ContractsCaller // Generic read-only contract binding to access the raw methods on
+// IpfsCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type IpfsCallerRaw struct {
+	Contract *IpfsCaller // Generic read-only contract binding to access the raw methods on
 }
 
-// ContractsTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
-type ContractsTransactorRaw struct {
-	Contract *ContractsTransactor // Generic write-only contract binding to access the raw methods on
+// IpfsTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type IpfsTransactorRaw struct {
+	Contract *IpfsTransactor // Generic write-only contract binding to access the raw methods on
 }
 
-// NewContracts creates a new instance of Contracts, bound to a specific deployed contract.
-func NewContracts(address common.Address, backend bind.ContractBackend) (*Contracts, error) {
-	contract, err := bindContracts(address, backend, backend, backend)
+// NewIpfs creates a new instance of Ipfs, bound to a specific deployed contract.
+func NewIpfs(address common.Address, backend bind.ContractBackend) (*Ipfs, error) {
+	contract, err := bindIpfs(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &Contracts{ContractsCaller: ContractsCaller{contract: contract}, ContractsTransactor: ContractsTransactor{contract: contract}, ContractsFilterer: ContractsFilterer{contract: contract}}, nil
+	return &Ipfs{IpfsCaller: IpfsCaller{contract: contract}, IpfsTransactor: IpfsTransactor{contract: contract}, IpfsFilterer: IpfsFilterer{contract: contract}}, nil
 }
 
-// NewContractsCaller creates a new read-only instance of Contracts, bound to a specific deployed contract.
-func NewContractsCaller(address common.Address, caller bind.ContractCaller) (*ContractsCaller, error) {
-	contract, err := bindContracts(address, caller, nil, nil)
+// NewIpfsCaller creates a new read-only instance of Ipfs, bound to a specific deployed contract.
+func NewIpfsCaller(address common.Address, caller bind.ContractCaller) (*IpfsCaller, error) {
+	contract, err := bindIpfs(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractsCaller{contract: contract}, nil
+	return &IpfsCaller{contract: contract}, nil
 }
 
-// NewContractsTransactor creates a new write-only instance of Contracts, bound to a specific deployed contract.
-func NewContractsTransactor(address common.Address, transactor bind.ContractTransactor) (*ContractsTransactor, error) {
-	contract, err := bindContracts(address, nil, transactor, nil)
+// NewIpfsTransactor creates a new write-only instance of Ipfs, bound to a specific deployed contract.
+func NewIpfsTransactor(address common.Address, transactor bind.ContractTransactor) (*IpfsTransactor, error) {
+	contract, err := bindIpfs(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractsTransactor{contract: contract}, nil
+	return &IpfsTransactor{contract: contract}, nil
 }
 
-// NewContractsFilterer creates a new log filterer instance of Contracts, bound to a specific deployed contract.
-func NewContractsFilterer(address common.Address, filterer bind.ContractFilterer) (*ContractsFilterer, error) {
-	contract, err := bindContracts(address, nil, nil, filterer)
+// NewIpfsFilterer creates a new log filterer instance of Ipfs, bound to a specific deployed contract.
+func NewIpfsFilterer(address common.Address, filterer bind.ContractFilterer) (*IpfsFilterer, error) {
+	contract, err := bindIpfs(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractsFilterer{contract: contract}, nil
+	return &IpfsFilterer{contract: contract}, nil
 }
 
-// bindContracts binds a generic wrapper to an already deployed contract.
-func bindContracts(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ContractsABI))
+// bindIpfs binds a generic wrapper to an already deployed contract.
+func bindIpfs(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := abi.JSON(strings.NewReader(IpfsABI))
 	if err != nil {
 		return nil, err
 	}
@@ -152,49 +152,49 @@ func bindContracts(address common.Address, caller bind.ContractCaller, transacto
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Contracts *ContractsRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Contracts.Contract.ContractsCaller.contract.Call(opts, result, method, params...)
+func (_Ipfs *IpfsRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Ipfs.Contract.IpfsCaller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Contracts *ContractsRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contracts.Contract.ContractsTransactor.contract.Transfer(opts)
+func (_Ipfs *IpfsRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Ipfs.Contract.IpfsTransactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Contracts *ContractsRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Contracts.Contract.ContractsTransactor.contract.Transact(opts, method, params...)
+func (_Ipfs *IpfsRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Ipfs.Contract.IpfsTransactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Contracts *ContractsCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Contracts.Contract.contract.Call(opts, result, method, params...)
+func (_Ipfs *IpfsCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Ipfs.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Contracts *ContractsTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contracts.Contract.contract.Transfer(opts)
+func (_Ipfs *IpfsTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Ipfs.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Contracts *ContractsTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Contracts.Contract.contract.Transact(opts, method, params...)
+func (_Ipfs *IpfsTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Ipfs.Contract.contract.Transact(opts, method, params...)
 }
 
 // AddrPeerMap is a free data retrieval call binding the contract method 0x9d6c39a2.
 //
 // Solidity: function addrPeerMap(address ) view returns(string PeerId, bool valid)
-func (_Contracts *ContractsCaller) AddrPeerMap(opts *bind.CallOpts, arg0 common.Address) (struct {
+func (_Ipfs *IpfsCaller) AddrPeerMap(opts *bind.CallOpts, arg0 common.Address) (struct {
 	PeerId string
 	Valid  bool
 }, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "addrPeerMap", arg0)
+	err := _Ipfs.contract.Call(opts, &out, "addrPeerMap", arg0)
 
 	outstruct := new(struct {
 		PeerId string
@@ -214,33 +214,33 @@ func (_Contracts *ContractsCaller) AddrPeerMap(opts *bind.CallOpts, arg0 common.
 // AddrPeerMap is a free data retrieval call binding the contract method 0x9d6c39a2.
 //
 // Solidity: function addrPeerMap(address ) view returns(string PeerId, bool valid)
-func (_Contracts *ContractsSession) AddrPeerMap(arg0 common.Address) (struct {
+func (_Ipfs *IpfsSession) AddrPeerMap(arg0 common.Address) (struct {
 	PeerId string
 	Valid  bool
 }, error) {
-	return _Contracts.Contract.AddrPeerMap(&_Contracts.CallOpts, arg0)
+	return _Ipfs.Contract.AddrPeerMap(&_Ipfs.CallOpts, arg0)
 }
 
 // AddrPeerMap is a free data retrieval call binding the contract method 0x9d6c39a2.
 //
 // Solidity: function addrPeerMap(address ) view returns(string PeerId, bool valid)
-func (_Contracts *ContractsCallerSession) AddrPeerMap(arg0 common.Address) (struct {
+func (_Ipfs *IpfsCallerSession) AddrPeerMap(arg0 common.Address) (struct {
 	PeerId string
 	Valid  bool
 }, error) {
-	return _Contracts.Contract.AddrPeerMap(&_Contracts.CallOpts, arg0)
+	return _Ipfs.Contract.AddrPeerMap(&_Ipfs.CallOpts, arg0)
 }
 
 // FileMap is a free data retrieval call binding the contract method 0x167e3841.
 //
 // Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock)
-func (_Contracts *ContractsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
+func (_Ipfs *IpfsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
 	Owner       common.Address
 	Size        *big.Int
 	ExpireBlock *big.Int
 }, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "fileMap", arg0)
+	err := _Ipfs.contract.Call(opts, &out, "fileMap", arg0)
 
 	outstruct := new(struct {
 		Owner       common.Address
@@ -262,31 +262,62 @@ func (_Contracts *ContractsCaller) FileMap(opts *bind.CallOpts, arg0 string) (st
 // FileMap is a free data retrieval call binding the contract method 0x167e3841.
 //
 // Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock)
-func (_Contracts *ContractsSession) FileMap(arg0 string) (struct {
+func (_Ipfs *IpfsSession) FileMap(arg0 string) (struct {
 	Owner       common.Address
 	Size        *big.Int
 	ExpireBlock *big.Int
 }, error) {
-	return _Contracts.Contract.FileMap(&_Contracts.CallOpts, arg0)
+	return _Ipfs.Contract.FileMap(&_Ipfs.CallOpts, arg0)
 }
 
 // FileMap is a free data retrieval call binding the contract method 0x167e3841.
 //
 // Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock)
-func (_Contracts *ContractsCallerSession) FileMap(arg0 string) (struct {
+func (_Ipfs *IpfsCallerSession) FileMap(arg0 string) (struct {
 	Owner       common.Address
 	Size        *big.Int
 	ExpireBlock *big.Int
 }, error) {
-	return _Contracts.Contract.FileMap(&_Contracts.CallOpts, arg0)
+	return _Ipfs.Contract.FileMap(&_Ipfs.CallOpts, arg0)
+}
+
+// GetPeerByPid is a free data retrieval call binding the contract method 0xfd993f96.
+//
+// Solidity: function getPeerByPid(string pid) view returns((string,string[],bool))
+func (_Ipfs *IpfsCaller) GetPeerByPid(opts *bind.CallOpts, pid string) (IPFSPeer, error) {
+	var out []interface{}
+	err := _Ipfs.contract.Call(opts, &out, "getPeerByPid", pid)
+
+	if err != nil {
+		return *new(IPFSPeer), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IPFSPeer)).(*IPFSPeer)
+
+	return out0, err
+
+}
+
+// GetPeerByPid is a free data retrieval call binding the contract method 0xfd993f96.
+//
+// Solidity: function getPeerByPid(string pid) view returns((string,string[],bool))
+func (_Ipfs *IpfsSession) GetPeerByPid(pid string) (IPFSPeer, error) {
+	return _Ipfs.Contract.GetPeerByPid(&_Ipfs.CallOpts, pid)
+}
+
+// GetPeerByPid is a free data retrieval call binding the contract method 0xfd993f96.
+//
+// Solidity: function getPeerByPid(string pid) view returns((string,string[],bool))
+func (_Ipfs *IpfsCallerSession) GetPeerByPid(pid string) (IPFSPeer, error) {
+	return _Ipfs.Contract.GetPeerByPid(&_Ipfs.CallOpts, pid)
 }
 
 // GetPeerList is a free data retrieval call binding the contract method 0x21d47c2e.
 //
 // Solidity: function getPeerList(uint256 num) view returns((string,string[],bool)[])
-func (_Contracts *ContractsCaller) GetPeerList(opts *bind.CallOpts, num *big.Int) ([]IPFSPeer, error) {
+func (_Ipfs *IpfsCaller) GetPeerList(opts *bind.CallOpts, num *big.Int) ([]IPFSPeer, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "getPeerList", num)
+	err := _Ipfs.contract.Call(opts, &out, "getPeerList", num)
 
 	if err != nil {
 		return *new([]IPFSPeer), err
@@ -301,23 +332,23 @@ func (_Contracts *ContractsCaller) GetPeerList(opts *bind.CallOpts, num *big.Int
 // GetPeerList is a free data retrieval call binding the contract method 0x21d47c2e.
 //
 // Solidity: function getPeerList(uint256 num) view returns((string,string[],bool)[])
-func (_Contracts *ContractsSession) GetPeerList(num *big.Int) ([]IPFSPeer, error) {
-	return _Contracts.Contract.GetPeerList(&_Contracts.CallOpts, num)
+func (_Ipfs *IpfsSession) GetPeerList(num *big.Int) ([]IPFSPeer, error) {
+	return _Ipfs.Contract.GetPeerList(&_Ipfs.CallOpts, num)
 }
 
 // GetPeerList is a free data retrieval call binding the contract method 0x21d47c2e.
 //
 // Solidity: function getPeerList(uint256 num) view returns((string,string[],bool)[])
-func (_Contracts *ContractsCallerSession) GetPeerList(num *big.Int) ([]IPFSPeer, error) {
-	return _Contracts.Contract.GetPeerList(&_Contracts.CallOpts, num)
+func (_Ipfs *IpfsCallerSession) GetPeerList(num *big.Int) ([]IPFSPeer, error) {
+	return _Ipfs.Contract.GetPeerList(&_Ipfs.CallOpts, num)
 }
 
 // Head is a free data retrieval call binding the contract method 0x8f7dcfa3.
 //
 // Solidity: function head() view returns(address)
-func (_Contracts *ContractsCaller) Head(opts *bind.CallOpts) (common.Address, error) {
+func (_Ipfs *IpfsCaller) Head(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "head")
+	err := _Ipfs.contract.Call(opts, &out, "head")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -332,23 +363,23 @@ func (_Contracts *ContractsCaller) Head(opts *bind.CallOpts) (common.Address, er
 // Head is a free data retrieval call binding the contract method 0x8f7dcfa3.
 //
 // Solidity: function head() view returns(address)
-func (_Contracts *ContractsSession) Head() (common.Address, error) {
-	return _Contracts.Contract.Head(&_Contracts.CallOpts)
+func (_Ipfs *IpfsSession) Head() (common.Address, error) {
+	return _Ipfs.Contract.Head(&_Ipfs.CallOpts)
 }
 
 // Head is a free data retrieval call binding the contract method 0x8f7dcfa3.
 //
 // Solidity: function head() view returns(address)
-func (_Contracts *ContractsCallerSession) Head() (common.Address, error) {
-	return _Contracts.Contract.Head(&_Contracts.CallOpts)
+func (_Ipfs *IpfsCallerSession) Head() (common.Address, error) {
+	return _Ipfs.Contract.Head(&_Ipfs.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contracts *ContractsCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
+func (_Ipfs *IpfsCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "owner")
+	err := _Ipfs.contract.Call(opts, &out, "owner")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -363,23 +394,23 @@ func (_Contracts *ContractsCaller) Owner(opts *bind.CallOpts) (common.Address, e
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contracts *ContractsSession) Owner() (common.Address, error) {
-	return _Contracts.Contract.Owner(&_Contracts.CallOpts)
+func (_Ipfs *IpfsSession) Owner() (common.Address, error) {
+	return _Ipfs.Contract.Owner(&_Ipfs.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contracts *ContractsCallerSession) Owner() (common.Address, error) {
-	return _Contracts.Contract.Owner(&_Contracts.CallOpts)
+func (_Ipfs *IpfsCallerSession) Owner() (common.Address, error) {
+	return _Ipfs.Contract.Owner(&_Ipfs.CallOpts)
 }
 
 // PeerList is a free data retrieval call binding the contract method 0xe96e501a.
 //
 // Solidity: function peerList(address ) view returns(address)
-func (_Contracts *ContractsCaller) PeerList(opts *bind.CallOpts, arg0 common.Address) (common.Address, error) {
+func (_Ipfs *IpfsCaller) PeerList(opts *bind.CallOpts, arg0 common.Address) (common.Address, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "peerList", arg0)
+	err := _Ipfs.contract.Call(opts, &out, "peerList", arg0)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -394,23 +425,23 @@ func (_Contracts *ContractsCaller) PeerList(opts *bind.CallOpts, arg0 common.Add
 // PeerList is a free data retrieval call binding the contract method 0xe96e501a.
 //
 // Solidity: function peerList(address ) view returns(address)
-func (_Contracts *ContractsSession) PeerList(arg0 common.Address) (common.Address, error) {
-	return _Contracts.Contract.PeerList(&_Contracts.CallOpts, arg0)
+func (_Ipfs *IpfsSession) PeerList(arg0 common.Address) (common.Address, error) {
+	return _Ipfs.Contract.PeerList(&_Ipfs.CallOpts, arg0)
 }
 
 // PeerList is a free data retrieval call binding the contract method 0xe96e501a.
 //
 // Solidity: function peerList(address ) view returns(address)
-func (_Contracts *ContractsCallerSession) PeerList(arg0 common.Address) (common.Address, error) {
-	return _Contracts.Contract.PeerList(&_Contracts.CallOpts, arg0)
+func (_Ipfs *IpfsCallerSession) PeerList(arg0 common.Address) (common.Address, error) {
+	return _Ipfs.Contract.PeerList(&_Ipfs.CallOpts, arg0)
 }
 
 // PeerNum is a free data retrieval call binding the contract method 0xf9c20442.
 //
 // Solidity: function peerNum() view returns(uint256)
-func (_Contracts *ContractsCaller) PeerNum(opts *bind.CallOpts) (*big.Int, error) {
+func (_Ipfs *IpfsCaller) PeerNum(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "peerNum")
+	err := _Ipfs.contract.Call(opts, &out, "peerNum")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -425,23 +456,23 @@ func (_Contracts *ContractsCaller) PeerNum(opts *bind.CallOpts) (*big.Int, error
 // PeerNum is a free data retrieval call binding the contract method 0xf9c20442.
 //
 // Solidity: function peerNum() view returns(uint256)
-func (_Contracts *ContractsSession) PeerNum() (*big.Int, error) {
-	return _Contracts.Contract.PeerNum(&_Contracts.CallOpts)
+func (_Ipfs *IpfsSession) PeerNum() (*big.Int, error) {
+	return _Ipfs.Contract.PeerNum(&_Ipfs.CallOpts)
 }
 
 // PeerNum is a free data retrieval call binding the contract method 0xf9c20442.
 //
 // Solidity: function peerNum() view returns(uint256)
-func (_Contracts *ContractsCallerSession) PeerNum() (*big.Int, error) {
-	return _Contracts.Contract.PeerNum(&_Contracts.CallOpts)
+func (_Ipfs *IpfsCallerSession) PeerNum() (*big.Int, error) {
+	return _Ipfs.Contract.PeerNum(&_Ipfs.CallOpts)
 }
 
 // PidAddrMap is a free data retrieval call binding the contract method 0xad284b46.
 //
 // Solidity: function pidAddrMap(string ) view returns(address)
-func (_Contracts *ContractsCaller) PidAddrMap(opts *bind.CallOpts, arg0 string) (common.Address, error) {
+func (_Ipfs *IpfsCaller) PidAddrMap(opts *bind.CallOpts, arg0 string) (common.Address, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "pidAddrMap", arg0)
+	err := _Ipfs.contract.Call(opts, &out, "pidAddrMap", arg0)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -456,23 +487,23 @@ func (_Contracts *ContractsCaller) PidAddrMap(opts *bind.CallOpts, arg0 string) 
 // PidAddrMap is a free data retrieval call binding the contract method 0xad284b46.
 //
 // Solidity: function pidAddrMap(string ) view returns(address)
-func (_Contracts *ContractsSession) PidAddrMap(arg0 string) (common.Address, error) {
-	return _Contracts.Contract.PidAddrMap(&_Contracts.CallOpts, arg0)
+func (_Ipfs *IpfsSession) PidAddrMap(arg0 string) (common.Address, error) {
+	return _Ipfs.Contract.PidAddrMap(&_Ipfs.CallOpts, arg0)
 }
 
 // PidAddrMap is a free data retrieval call binding the contract method 0xad284b46.
 //
 // Solidity: function pidAddrMap(string ) view returns(address)
-func (_Contracts *ContractsCallerSession) PidAddrMap(arg0 string) (common.Address, error) {
-	return _Contracts.Contract.PidAddrMap(&_Contracts.CallOpts, arg0)
+func (_Ipfs *IpfsCallerSession) PidAddrMap(arg0 string) (common.Address, error) {
+	return _Ipfs.Contract.PidAddrMap(&_Ipfs.CallOpts, arg0)
 }
 
 // Price is a free data retrieval call binding the contract method 0xa035b1fe.
 //
 // Solidity: function price() view returns(uint256)
-func (_Contracts *ContractsCaller) Price(opts *bind.CallOpts) (*big.Int, error) {
+func (_Ipfs *IpfsCaller) Price(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Contracts.contract.Call(opts, &out, "price")
+	err := _Ipfs.contract.Call(opts, &out, "price")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -487,230 +518,230 @@ func (_Contracts *ContractsCaller) Price(opts *bind.CallOpts) (*big.Int, error) 
 // Price is a free data retrieval call binding the contract method 0xa035b1fe.
 //
 // Solidity: function price() view returns(uint256)
-func (_Contracts *ContractsSession) Price() (*big.Int, error) {
-	return _Contracts.Contract.Price(&_Contracts.CallOpts)
+func (_Ipfs *IpfsSession) Price() (*big.Int, error) {
+	return _Ipfs.Contract.Price(&_Ipfs.CallOpts)
 }
 
 // Price is a free data retrieval call binding the contract method 0xa035b1fe.
 //
 // Solidity: function price() view returns(uint256)
-func (_Contracts *ContractsCallerSession) Price() (*big.Int, error) {
-	return _Contracts.Contract.Price(&_Contracts.CallOpts)
+func (_Ipfs *IpfsCallerSession) Price() (*big.Int, error) {
+	return _Ipfs.Contract.Price(&_Ipfs.CallOpts)
 }
 
 // SetOwner is a paid mutator transaction binding the contract method 0x167d3e9c.
 //
 // Solidity: function SetOwner(address _to) returns()
-func (_Contracts *ContractsTransactor) SetOwner(opts *bind.TransactOpts, _to common.Address) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "SetOwner", _to)
+func (_Ipfs *IpfsTransactor) SetOwner(opts *bind.TransactOpts, _to common.Address) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "SetOwner", _to)
 }
 
 // SetOwner is a paid mutator transaction binding the contract method 0x167d3e9c.
 //
 // Solidity: function SetOwner(address _to) returns()
-func (_Contracts *ContractsSession) SetOwner(_to common.Address) (*types.Transaction, error) {
-	return _Contracts.Contract.SetOwner(&_Contracts.TransactOpts, _to)
+func (_Ipfs *IpfsSession) SetOwner(_to common.Address) (*types.Transaction, error) {
+	return _Ipfs.Contract.SetOwner(&_Ipfs.TransactOpts, _to)
 }
 
 // SetOwner is a paid mutator transaction binding the contract method 0x167d3e9c.
 //
 // Solidity: function SetOwner(address _to) returns()
-func (_Contracts *ContractsTransactorSession) SetOwner(_to common.Address) (*types.Transaction, error) {
-	return _Contracts.Contract.SetOwner(&_Contracts.TransactOpts, _to)
+func (_Ipfs *IpfsTransactorSession) SetOwner(_to common.Address) (*types.Transaction, error) {
+	return _Ipfs.Contract.SetOwner(&_Ipfs.TransactOpts, _to)
 }
 
 // SetPrice is a paid mutator transaction binding the contract method 0x4f5539c0.
 //
 // Solidity: function SetPrice(uint256 _price) returns()
-func (_Contracts *ContractsTransactor) SetPrice(opts *bind.TransactOpts, _price *big.Int) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "SetPrice", _price)
+func (_Ipfs *IpfsTransactor) SetPrice(opts *bind.TransactOpts, _price *big.Int) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "SetPrice", _price)
 }
 
 // SetPrice is a paid mutator transaction binding the contract method 0x4f5539c0.
 //
 // Solidity: function SetPrice(uint256 _price) returns()
-func (_Contracts *ContractsSession) SetPrice(_price *big.Int) (*types.Transaction, error) {
-	return _Contracts.Contract.SetPrice(&_Contracts.TransactOpts, _price)
+func (_Ipfs *IpfsSession) SetPrice(_price *big.Int) (*types.Transaction, error) {
+	return _Ipfs.Contract.SetPrice(&_Ipfs.TransactOpts, _price)
 }
 
 // SetPrice is a paid mutator transaction binding the contract method 0x4f5539c0.
 //
 // Solidity: function SetPrice(uint256 _price) returns()
-func (_Contracts *ContractsTransactorSession) SetPrice(_price *big.Int) (*types.Transaction, error) {
-	return _Contracts.Contract.SetPrice(&_Contracts.TransactOpts, _price)
+func (_Ipfs *IpfsTransactorSession) SetPrice(_price *big.Int) (*types.Transaction, error) {
+	return _Ipfs.Contract.SetPrice(&_Ipfs.TransactOpts, _price)
 }
 
 // SetToken is a paid mutator transaction binding the contract method 0xefc1fd16.
 //
 // Solidity: function SetToken(address _token) returns()
-func (_Contracts *ContractsTransactor) SetToken(opts *bind.TransactOpts, _token common.Address) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "SetToken", _token)
+func (_Ipfs *IpfsTransactor) SetToken(opts *bind.TransactOpts, _token common.Address) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "SetToken", _token)
 }
 
 // SetToken is a paid mutator transaction binding the contract method 0xefc1fd16.
 //
 // Solidity: function SetToken(address _token) returns()
-func (_Contracts *ContractsSession) SetToken(_token common.Address) (*types.Transaction, error) {
-	return _Contracts.Contract.SetToken(&_Contracts.TransactOpts, _token)
+func (_Ipfs *IpfsSession) SetToken(_token common.Address) (*types.Transaction, error) {
+	return _Ipfs.Contract.SetToken(&_Ipfs.TransactOpts, _token)
 }
 
 // SetToken is a paid mutator transaction binding the contract method 0xefc1fd16.
 //
 // Solidity: function SetToken(address _token) returns()
-func (_Contracts *ContractsTransactorSession) SetToken(_token common.Address) (*types.Transaction, error) {
-	return _Contracts.Contract.SetToken(&_Contracts.TransactOpts, _token)
+func (_Ipfs *IpfsTransactorSession) SetToken(_token common.Address) (*types.Transaction, error) {
+	return _Ipfs.Contract.SetToken(&_Ipfs.TransactOpts, _token)
 }
 
 // AddFile is a paid mutator transaction binding the contract method 0x7f7847fe.
 //
 // Solidity: function addFile(string uid, string cid, uint256 size, uint256 wad) payable returns()
-func (_Contracts *ContractsTransactor) AddFile(opts *bind.TransactOpts, uid string, cid string, size *big.Int, wad *big.Int) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "addFile", uid, cid, size, wad)
+func (_Ipfs *IpfsTransactor) AddFile(opts *bind.TransactOpts, uid string, cid string, size *big.Int, wad *big.Int) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "addFile", uid, cid, size, wad)
 }
 
 // AddFile is a paid mutator transaction binding the contract method 0x7f7847fe.
 //
 // Solidity: function addFile(string uid, string cid, uint256 size, uint256 wad) payable returns()
-func (_Contracts *ContractsSession) AddFile(uid string, cid string, size *big.Int, wad *big.Int) (*types.Transaction, error) {
-	return _Contracts.Contract.AddFile(&_Contracts.TransactOpts, uid, cid, size, wad)
+func (_Ipfs *IpfsSession) AddFile(uid string, cid string, size *big.Int, wad *big.Int) (*types.Transaction, error) {
+	return _Ipfs.Contract.AddFile(&_Ipfs.TransactOpts, uid, cid, size, wad)
 }
 
 // AddFile is a paid mutator transaction binding the contract method 0x7f7847fe.
 //
 // Solidity: function addFile(string uid, string cid, uint256 size, uint256 wad) payable returns()
-func (_Contracts *ContractsTransactorSession) AddFile(uid string, cid string, size *big.Int, wad *big.Int) (*types.Transaction, error) {
-	return _Contracts.Contract.AddFile(&_Contracts.TransactOpts, uid, cid, size, wad)
+func (_Ipfs *IpfsTransactorSession) AddFile(uid string, cid string, size *big.Int, wad *big.Int) (*types.Transaction, error) {
+	return _Ipfs.Contract.AddFile(&_Ipfs.TransactOpts, uid, cid, size, wad)
 }
 
 // AddPeer is a paid mutator transaction binding the contract method 0x6ff31945.
 //
 // Solidity: function addPeer(string uid, (string,string[],bool) _peer) returns()
-func (_Contracts *ContractsTransactor) AddPeer(opts *bind.TransactOpts, uid string, _peer IPFSPeer) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "addPeer", uid, _peer)
+func (_Ipfs *IpfsTransactor) AddPeer(opts *bind.TransactOpts, uid string, _peer IPFSPeer) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "addPeer", uid, _peer)
 }
 
 // AddPeer is a paid mutator transaction binding the contract method 0x6ff31945.
 //
 // Solidity: function addPeer(string uid, (string,string[],bool) _peer) returns()
-func (_Contracts *ContractsSession) AddPeer(uid string, _peer IPFSPeer) (*types.Transaction, error) {
-	return _Contracts.Contract.AddPeer(&_Contracts.TransactOpts, uid, _peer)
+func (_Ipfs *IpfsSession) AddPeer(uid string, _peer IPFSPeer) (*types.Transaction, error) {
+	return _Ipfs.Contract.AddPeer(&_Ipfs.TransactOpts, uid, _peer)
 }
 
 // AddPeer is a paid mutator transaction binding the contract method 0x6ff31945.
 //
 // Solidity: function addPeer(string uid, (string,string[],bool) _peer) returns()
-func (_Contracts *ContractsTransactorSession) AddPeer(uid string, _peer IPFSPeer) (*types.Transaction, error) {
-	return _Contracts.Contract.AddPeer(&_Contracts.TransactOpts, uid, _peer)
+func (_Ipfs *IpfsTransactorSession) AddPeer(uid string, _peer IPFSPeer) (*types.Transaction, error) {
+	return _Ipfs.Contract.AddPeer(&_Ipfs.TransactOpts, uid, _peer)
 }
 
 // PeerHeartbeat is a paid mutator transaction binding the contract method 0xf71e3e11.
 //
 // Solidity: function peerHeartbeat(string uid) returns()
-func (_Contracts *ContractsTransactor) PeerHeartbeat(opts *bind.TransactOpts, uid string) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "peerHeartbeat", uid)
+func (_Ipfs *IpfsTransactor) PeerHeartbeat(opts *bind.TransactOpts, uid string) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "peerHeartbeat", uid)
 }
 
 // PeerHeartbeat is a paid mutator transaction binding the contract method 0xf71e3e11.
 //
 // Solidity: function peerHeartbeat(string uid) returns()
-func (_Contracts *ContractsSession) PeerHeartbeat(uid string) (*types.Transaction, error) {
-	return _Contracts.Contract.PeerHeartbeat(&_Contracts.TransactOpts, uid)
+func (_Ipfs *IpfsSession) PeerHeartbeat(uid string) (*types.Transaction, error) {
+	return _Ipfs.Contract.PeerHeartbeat(&_Ipfs.TransactOpts, uid)
 }
 
 // PeerHeartbeat is a paid mutator transaction binding the contract method 0xf71e3e11.
 //
 // Solidity: function peerHeartbeat(string uid) returns()
-func (_Contracts *ContractsTransactorSession) PeerHeartbeat(uid string) (*types.Transaction, error) {
-	return _Contracts.Contract.PeerHeartbeat(&_Contracts.TransactOpts, uid)
+func (_Ipfs *IpfsTransactorSession) PeerHeartbeat(uid string) (*types.Transaction, error) {
+	return _Ipfs.Contract.PeerHeartbeat(&_Ipfs.TransactOpts, uid)
 }
 
 // RemoveFile is a paid mutator transaction binding the contract method 0x99f553dc.
 //
 // Solidity: function removeFile(string uid, string cid) payable returns()
-func (_Contracts *ContractsTransactor) RemoveFile(opts *bind.TransactOpts, uid string, cid string) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "removeFile", uid, cid)
+func (_Ipfs *IpfsTransactor) RemoveFile(opts *bind.TransactOpts, uid string, cid string) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "removeFile", uid, cid)
 }
 
 // RemoveFile is a paid mutator transaction binding the contract method 0x99f553dc.
 //
 // Solidity: function removeFile(string uid, string cid) payable returns()
-func (_Contracts *ContractsSession) RemoveFile(uid string, cid string) (*types.Transaction, error) {
-	return _Contracts.Contract.RemoveFile(&_Contracts.TransactOpts, uid, cid)
+func (_Ipfs *IpfsSession) RemoveFile(uid string, cid string) (*types.Transaction, error) {
+	return _Ipfs.Contract.RemoveFile(&_Ipfs.TransactOpts, uid, cid)
 }
 
 // RemoveFile is a paid mutator transaction binding the contract method 0x99f553dc.
 //
 // Solidity: function removeFile(string uid, string cid) payable returns()
-func (_Contracts *ContractsTransactorSession) RemoveFile(uid string, cid string) (*types.Transaction, error) {
-	return _Contracts.Contract.RemoveFile(&_Contracts.TransactOpts, uid, cid)
+func (_Ipfs *IpfsTransactorSession) RemoveFile(uid string, cid string) (*types.Transaction, error) {
+	return _Ipfs.Contract.RemoveFile(&_Ipfs.TransactOpts, uid, cid)
 }
 
 // RemovePeer is a paid mutator transaction binding the contract method 0xf683d96c.
 //
 // Solidity: function removePeer(string uid) returns()
-func (_Contracts *ContractsTransactor) RemovePeer(opts *bind.TransactOpts, uid string) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "removePeer", uid)
+func (_Ipfs *IpfsTransactor) RemovePeer(opts *bind.TransactOpts, uid string) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "removePeer", uid)
 }
 
 // RemovePeer is a paid mutator transaction binding the contract method 0xf683d96c.
 //
 // Solidity: function removePeer(string uid) returns()
-func (_Contracts *ContractsSession) RemovePeer(uid string) (*types.Transaction, error) {
-	return _Contracts.Contract.RemovePeer(&_Contracts.TransactOpts, uid)
+func (_Ipfs *IpfsSession) RemovePeer(uid string) (*types.Transaction, error) {
+	return _Ipfs.Contract.RemovePeer(&_Ipfs.TransactOpts, uid)
 }
 
 // RemovePeer is a paid mutator transaction binding the contract method 0xf683d96c.
 //
 // Solidity: function removePeer(string uid) returns()
-func (_Contracts *ContractsTransactorSession) RemovePeer(uid string) (*types.Transaction, error) {
-	return _Contracts.Contract.RemovePeer(&_Contracts.TransactOpts, uid)
+func (_Ipfs *IpfsTransactorSession) RemovePeer(uid string) (*types.Transaction, error) {
+	return _Ipfs.Contract.RemovePeer(&_Ipfs.TransactOpts, uid)
 }
 
 // UpdateAddress is a paid mutator transaction binding the contract method 0x5ee96147.
 //
 // Solidity: function updateAddress(string uid, string[] addressList) returns()
-func (_Contracts *ContractsTransactor) UpdateAddress(opts *bind.TransactOpts, uid string, addressList []string) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "updateAddress", uid, addressList)
+func (_Ipfs *IpfsTransactor) UpdateAddress(opts *bind.TransactOpts, uid string, addressList []string) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "updateAddress", uid, addressList)
 }
 
 // UpdateAddress is a paid mutator transaction binding the contract method 0x5ee96147.
 //
 // Solidity: function updateAddress(string uid, string[] addressList) returns()
-func (_Contracts *ContractsSession) UpdateAddress(uid string, addressList []string) (*types.Transaction, error) {
-	return _Contracts.Contract.UpdateAddress(&_Contracts.TransactOpts, uid, addressList)
+func (_Ipfs *IpfsSession) UpdateAddress(uid string, addressList []string) (*types.Transaction, error) {
+	return _Ipfs.Contract.UpdateAddress(&_Ipfs.TransactOpts, uid, addressList)
 }
 
 // UpdateAddress is a paid mutator transaction binding the contract method 0x5ee96147.
 //
 // Solidity: function updateAddress(string uid, string[] addressList) returns()
-func (_Contracts *ContractsTransactorSession) UpdateAddress(uid string, addressList []string) (*types.Transaction, error) {
-	return _Contracts.Contract.UpdateAddress(&_Contracts.TransactOpts, uid, addressList)
+func (_Ipfs *IpfsTransactorSession) UpdateAddress(uid string, addressList []string) (*types.Transaction, error) {
+	return _Ipfs.Contract.UpdateAddress(&_Ipfs.TransactOpts, uid, addressList)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x30b39a62.
 //
 // Solidity: function withdraw(string uid, uint256 wad) returns()
-func (_Contracts *ContractsTransactor) Withdraw(opts *bind.TransactOpts, uid string, wad *big.Int) (*types.Transaction, error) {
-	return _Contracts.contract.Transact(opts, "withdraw", uid, wad)
+func (_Ipfs *IpfsTransactor) Withdraw(opts *bind.TransactOpts, uid string, wad *big.Int) (*types.Transaction, error) {
+	return _Ipfs.contract.Transact(opts, "withdraw", uid, wad)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x30b39a62.
 //
 // Solidity: function withdraw(string uid, uint256 wad) returns()
-func (_Contracts *ContractsSession) Withdraw(uid string, wad *big.Int) (*types.Transaction, error) {
-	return _Contracts.Contract.Withdraw(&_Contracts.TransactOpts, uid, wad)
+func (_Ipfs *IpfsSession) Withdraw(uid string, wad *big.Int) (*types.Transaction, error) {
+	return _Ipfs.Contract.Withdraw(&_Ipfs.TransactOpts, uid, wad)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x30b39a62.
 //
 // Solidity: function withdraw(string uid, uint256 wad) returns()
-func (_Contracts *ContractsTransactorSession) Withdraw(uid string, wad *big.Int) (*types.Transaction, error) {
-	return _Contracts.Contract.Withdraw(&_Contracts.TransactOpts, uid, wad)
+func (_Ipfs *IpfsTransactorSession) Withdraw(uid string, wad *big.Int) (*types.Transaction, error) {
+	return _Ipfs.Contract.Withdraw(&_Ipfs.TransactOpts, uid, wad)
 }
 
-// ContractsSuccessIterator is returned from FilterSuccess and is used to iterate over the raw logs and unpacked data for Success events raised by the Contracts contract.
-type ContractsSuccessIterator struct {
-	Event *ContractsSuccess // Event containing the contract specifics and raw log
+// IpfsSuccessIterator is returned from FilterSuccess and is used to iterate over the raw logs and unpacked data for Success events raised by the Ipfs contract.
+type IpfsSuccessIterator struct {
+	Event *IpfsSuccess // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -724,7 +755,7 @@ type ContractsSuccessIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ContractsSuccessIterator) Next() bool {
+func (it *IpfsSuccessIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -733,7 +764,7 @@ func (it *ContractsSuccessIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ContractsSuccess)
+			it.Event = new(IpfsSuccess)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -748,7 +779,7 @@ func (it *ContractsSuccessIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ContractsSuccess)
+		it.Event = new(IpfsSuccess)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -764,19 +795,19 @@ func (it *ContractsSuccessIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractsSuccessIterator) Error() error {
+func (it *IpfsSuccessIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ContractsSuccessIterator) Close() error {
+func (it *IpfsSuccessIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ContractsSuccess represents a Success event raised by the Contracts contract.
-type ContractsSuccess struct {
+// IpfsSuccess represents a Success event raised by the Ipfs contract.
+type IpfsSuccess struct {
 	Uid common.Hash
 	Raw types.Log // Blockchain specific contextual infos
 }
@@ -784,31 +815,31 @@ type ContractsSuccess struct {
 // FilterSuccess is a free log retrieval operation binding the contract event 0x166b96a382dc3abc86ba052ca9c020cfd7022d2d3059e868918a3d20779e41cc.
 //
 // Solidity: event Success(string indexed uid)
-func (_Contracts *ContractsFilterer) FilterSuccess(opts *bind.FilterOpts, uid []string) (*ContractsSuccessIterator, error) {
+func (_Ipfs *IpfsFilterer) FilterSuccess(opts *bind.FilterOpts, uid []string) (*IpfsSuccessIterator, error) {
 
 	var uidRule []interface{}
 	for _, uidItem := range uid {
 		uidRule = append(uidRule, uidItem)
 	}
 
-	logs, sub, err := _Contracts.contract.FilterLogs(opts, "Success", uidRule)
+	logs, sub, err := _Ipfs.contract.FilterLogs(opts, "Success", uidRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractsSuccessIterator{contract: _Contracts.contract, event: "Success", logs: logs, sub: sub}, nil
+	return &IpfsSuccessIterator{contract: _Ipfs.contract, event: "Success", logs: logs, sub: sub}, nil
 }
 
 // WatchSuccess is a free log subscription operation binding the contract event 0x166b96a382dc3abc86ba052ca9c020cfd7022d2d3059e868918a3d20779e41cc.
 //
 // Solidity: event Success(string indexed uid)
-func (_Contracts *ContractsFilterer) WatchSuccess(opts *bind.WatchOpts, sink chan<- *ContractsSuccess, uid []string) (event.Subscription, error) {
+func (_Ipfs *IpfsFilterer) WatchSuccess(opts *bind.WatchOpts, sink chan<- *IpfsSuccess, uid []string) (event.Subscription, error) {
 
 	var uidRule []interface{}
 	for _, uidItem := range uid {
 		uidRule = append(uidRule, uidItem)
 	}
 
-	logs, sub, err := _Contracts.contract.WatchLogs(opts, "Success", uidRule)
+	logs, sub, err := _Ipfs.contract.WatchLogs(opts, "Success", uidRule)
 	if err != nil {
 		return nil, err
 	}
@@ -818,8 +849,8 @@ func (_Contracts *ContractsFilterer) WatchSuccess(opts *bind.WatchOpts, sink cha
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ContractsSuccess)
-				if err := _Contracts.contract.UnpackLog(event, "Success", log); err != nil {
+				event := new(IpfsSuccess)
+				if err := _Ipfs.contract.UnpackLog(event, "Success", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -843,9 +874,9 @@ func (_Contracts *ContractsFilterer) WatchSuccess(opts *bind.WatchOpts, sink cha
 // ParseSuccess is a log parse operation binding the contract event 0x166b96a382dc3abc86ba052ca9c020cfd7022d2d3059e868918a3d20779e41cc.
 //
 // Solidity: event Success(string indexed uid)
-func (_Contracts *ContractsFilterer) ParseSuccess(log types.Log) (*ContractsSuccess, error) {
-	event := new(ContractsSuccess)
-	if err := _Contracts.contract.UnpackLog(event, "Success", log); err != nil {
+func (_Ipfs *IpfsFilterer) ParseSuccess(log types.Log) (*IpfsSuccess, error) {
+	event := new(IpfsSuccess)
+	if err := _Ipfs.contract.UnpackLog(event, "Success", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

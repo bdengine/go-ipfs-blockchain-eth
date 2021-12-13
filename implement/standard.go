@@ -69,18 +69,25 @@ func NewApi(configRoot string, peerId string) (*api, error) {
 		return nil, err
 	}
 
-	// 检查配置项是否完整  todo 检查配置项是否满足条件
-	if a.Chain.ChainId == 0 || a.ID.Pid == "" {
-		return nil, fmt.Errorf("配置文件配置项不完整")
+	// todo 检查配置项是否完整
+	if a.Client.HttpUrl == "" || a.Client.SocketUrl == "" {
+		return nil, fmt.Errorf("配置文件Client信息不完整")
 	}
 
-	_, exist := a.ContractMap[contractIpfs]
-	if !exist {
-		return nil, fmt.Errorf("配置文件配置项不完整")
+	if a.ContractMap[contractIpfs].ContractAddr == "" || a.ContractMap[contractToken].ContractAddr == "" {
+		return nil, fmt.Errorf("配置文件ContractMap不完整")
 	}
-	_, exist = a.ContractMap[contractToken]
-	if !exist {
-		return nil, fmt.Errorf("配置文件配置项不完整")
+
+	if a.Chain.ChainId == 0 {
+		return nil, fmt.Errorf("配置文件Chain不完整")
+	}
+
+	if a.Config.RequestTimeout == 0 {
+		return nil, fmt.Errorf("配置文件Config不完整")
+	}
+
+	if a.ID.Pid == "" || a.ID.PriKey == "" {
+		return nil, fmt.Errorf("配置文件ID不完整")
 	}
 
 	priKey, err := crypto.HexToECDSA(a.ID.PriKey)
@@ -118,13 +125,9 @@ func NewApi(configRoot string, peerId string) (*api, error) {
 	return &a, err
 }
 
-func (a *api) ReportContribute(num int64) error {
-	return nil
-}
-
 func (a *api) InitPeer(peer model.CorePeer) error {
 	ctx := context.Background()
-	var f executeFunc = func(uid string, contract *ipfs.Contracts, opts *bind.TransactOpts) (*types.Transaction, error) {
+	var f ExecuteFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 		return contract.AddPeer(opts, uid, ipfs.IPFSPeer{
 			PeerId:      peer.PeerId,
 			AddressList: peer.Addresses,
@@ -132,16 +135,16 @@ func (a *api) InitPeer(peer model.CorePeer) error {
 		})
 	}
 	// 执行交易
-	return a.ExecuteTransact(ctx, f)
+	return a.ExecuteIpfsTransact(ctx, f)
 }
 
-func (a *api) RemovePeer(pid string) error {
+func (a *api) RemovePeer() error {
 	ctx := context.Background()
-	var f executeFunc = func(uid string, contract *ipfs.Contracts, opts *bind.TransactOpts) (*types.Transaction, error) {
+	var f ExecuteFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 		return contract.RemovePeer(opts, uid)
 	}
 	// 执行交易
-	return a.ExecuteTransact(ctx, f)
+	return a.ExecuteIpfsTransact(ctx, f)
 }
 
 func (a *api) DaemonPeer() error {
@@ -158,22 +161,22 @@ func (a *api) ApplyRemote(cid string) error {
 
 func (a *api) AddFile(info model.IpfsFileInfo) error {
 	ctx := context.Background()
-	var f executeFunc = func(uid string, contract *ipfs.Contracts, opts *bind.TransactOpts) (*types.Transaction, error) {
+	var f ExecuteFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 
 		return contract.AddFile(opts, uid, info.Cid, big.NewInt(0), big.NewInt(0))
 	}
 	// 执行交易
-	return a.ExecuteTransact(ctx, f)
+	return a.ExecuteIpfsTransact(ctx, f)
 }
 
 func (a *api) DeleteFile(cid string) error {
 	ctx := context.Background()
 
-	var f executeFunc = func(uid string, contract *ipfs.Contracts, opts *bind.TransactOpts) (*types.Transaction, error) {
+	var f ExecuteFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 		return contract.RemoveFile(opts, uid, cid)
 	}
 	// 执行交易
-	return a.ExecuteTransact(ctx, f)
+	return a.ExecuteIpfsTransact(ctx, f)
 }
 
 func (a *api) GetPeerList() ([]model.CorePeer, error) {
@@ -200,12 +203,28 @@ func (a *api) GetUserCode() (string, error) {
 }
 
 func (a *api) GetPeer(id string) (model.CorePeer, error) {
-	res := model.CorePeer{}
+	res := model.CorePeer{PeerId: id}
+	cli, contract, err := GetIpfsContract(a.Client.HttpUrl, a.ContractMap[contractIpfs].ContractAddr)
+	if err != nil {
+		return res, err
+	}
+	defer cli.Close()
+	peer, err := contract.GetPeerByPid(nil, id)
+	if err != nil {
+		return res, err
+	}
+	res.Addresses = peer.AddressList
 	return res, nil
 }
 
 func (a *api) GetChallenge() (string, error) {
-	return "", nil
+	cli, contr, err := GetSCTokenContract(a.Client.HttpUrl, a.ContractMap[contractToken].ContractAddr)
+	if err != nil {
+		return "", err
+	}
+	defer cli.Close()
+	challenge, _, err := contr.GetChallenge(nil)
+	return challenge, err
 }
 
 func (a *api) Mining([]model.IpfsMining) error {

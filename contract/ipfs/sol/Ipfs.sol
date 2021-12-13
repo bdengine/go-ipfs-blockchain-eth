@@ -59,6 +59,11 @@ contract IPFS {
         return res;
     }
 
+    function getPeerByPid(string calldata pid) public view returns (Peer memory) {
+        return addrPeerMap[pidAddrMap[pid]];
+    }
+
+
     // 更新地址
     function updateAddress(string calldata uid, string[] memory addressList) PeerExist  external {
         addrPeerMap[msg.sender].AddressList = addressList;

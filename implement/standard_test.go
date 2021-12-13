@@ -25,9 +25,10 @@ func TestNewApi(t *testing.T) {
 }
 
 var a *api
+var peerId string = "test1"
 
 func init() {
-	test, err := NewApi(configRoot, "test1")
+	test, err := NewApi(configRoot, peerId)
 	if err != nil {
 		panic(err)
 	}
@@ -42,14 +43,18 @@ func TestApi_InitPeer(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = a.RemovePeer(a.ID.Pid)
+
+	peer, err := a.GetPeer(peerId)
+	fmt.Println(peer)
+
+	err = a.RemovePeer()
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 
 func TestApi_RemovePeer(t *testing.T) {
-	err := a.RemovePeer(a.ID.Pid)
+	err := a.RemovePeer()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -60,7 +65,7 @@ func TestEvent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sch := make(chan *ipfs.ContractsSuccess)
+	sch := make(chan *ipfs.IpfsSuccess)
 	sub, err := contract.WatchSuccess(nil, sch, nil)
 	if err != nil {
 		t.Fatal(err)
