@@ -16,6 +16,10 @@ import (
 	"time"
 )
 
+const (
+	defaultGasLimit = 300000
+)
+
 type ExecuteFunc func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error)
 
 func GetIpfsContract(url string, addr string) (*ethclient.Client, *ipfs.Ipfs, error) {
@@ -45,7 +49,7 @@ func GetSCTokenContract(url string, addr string) (*ethclient.Client, *scToken.Sc
 }
 
 // GenTransactOpts 生成默认交易配置项
-func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client) (*bind.TransactOpts, error) {
+func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, gasLimit uint64) (*bind.TransactOpts, error) {
 	opts, err := bind.NewKeyedTransactorWithChainID(a.priKey, a.chainId)
 	if err != nil {
 		return nil, err
@@ -60,7 +64,11 @@ func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client) 
 	}
 	opts.Nonce = big.NewInt(int64(nonce))
 	opts.Value = big.NewInt(0)
-	opts.GasLimit = uint64(300000) // in units
+
+	if gasLimit == 0 {
+		gasLimit = 300000
+	}
+	opts.GasLimit = gasLimit // in units
 	opts.GasPrice = gasPrice
 	return opts, nil
 }
@@ -81,7 +89,7 @@ func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error
 	}
 	defer sub.Unsubscribe()
 	// 生成配置项
-	opts, err := a.GenTransactOpts(ctx, sCli)
+	opts, err := a.GenTransactOpts(ctx, sCli, defaultGasLimit)
 	if err != nil {
 		return err
 	}
