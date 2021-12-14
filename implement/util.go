@@ -95,10 +95,10 @@ func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error
 
 	// todo 日志
 	log.Debugf("%v交易结果查询：", tx.Hash())
-	return WaitResult(ctx, sCli, sch, sub, tx.Hash(), uid)
+	return waitResult(ctx, sCli, sch, sub, tx.Hash(), uid)
 }
 
-func WaitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.IpfsSuccess, sub event.Subscription, txId common.Hash, uid string) error {
+func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.IpfsSuccess, sub event.Subscription, txId common.Hash, uid string) error {
 	tick := time.Tick(2 * time.Second)
 	var err error
 	for {
