@@ -5,14 +5,14 @@ import (
 	"math/big"
 )
 
-func (a *peerImpl) GetPeerList() ([]model.CorePeer, error) {
+func (a *peerImpl) GetPeerList(num int) ([]model.CorePeer, error) {
 	httpClient, contract, err := GetIpfsContract(a.Client.HttpUrl, a.ContractMap[contractIpfs].ContractAddr)
 	if err != nil {
 		return nil, err
 	}
 	defer httpClient.Close()
 
-	list, err := contract.GetPeerList(nil, big.NewInt(-1))
+	list, err := contract.GetPeerList(nil, big.NewInt(int64(num)))
 	res := make([]model.CorePeer, len(list))
 	for i, peer := range list {
 		res[i] = model.CorePeer{

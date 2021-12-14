@@ -20,7 +20,7 @@ const (
 	defaultGasLimit = 300000
 )
 
-type ExecuteFunc func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error)
+type ExecuteIpfsFunc func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error)
 
 func GetIpfsContract(url string, addr string) (*ethclient.Client, *ipfs.Ipfs, error) {
 	httpClient, err := ethclient.Dial(url)
@@ -74,7 +74,7 @@ func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, 
 }
 
 // ExecuteIpfsTransact 执行交易,等待返回成功与否
-func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error {
+func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) error {
 	// 获取客户端和合约实例
 	sCli, contract, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
 	if err != nil {

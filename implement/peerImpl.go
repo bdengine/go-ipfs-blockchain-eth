@@ -143,12 +143,8 @@ func checkConfig(a *config) error {
 
 func (a *peerImpl) InitPeer(peer model.CorePeer) error {
 	ctx := context.Background()
-	var f ExecuteFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		return contract.AddPeer(opts, uid, ipfs.IPFSPeer{
-			PeerId:      peer.PeerId,
-			AddressList: peer.Addresses,
-			Valid:       true,
-		})
+	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
+		return contract.AddPeer(opts, uid, peer.PeerId, peer.Addresses)
 	}
 	// 执行交易
 	return a.ExecuteIpfsTransact(ctx, f)
@@ -156,7 +152,7 @@ func (a *peerImpl) InitPeer(peer model.CorePeer) error {
 
 func (a *peerImpl) RemovePeer() error {
 	ctx := context.Background()
-	var f ExecuteFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
+	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 		return contract.RemovePeer(opts, uid)
 	}
 	// 执行交易

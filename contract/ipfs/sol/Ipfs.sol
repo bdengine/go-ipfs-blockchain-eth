@@ -100,12 +100,11 @@ contract IPFS {
         emit Success(uid);
     }
 
-    function addPeer(string calldata uid,Peer memory _peer) PeerNotExist external {
-        _peer.valid = true;
+    function addPeer(string calldata uid,string calldata PeerId, string[] calldata AddressList) PeerNotExist external {
         peerList[msg.sender] = head;
         head = msg.sender;
 
-        addrPeerMap[msg.sender] = _peer;
+        addrPeerMap[msg.sender] = Peer(peerId,AddressList,true);
         pidAddrMap[_peer.PeerId] = msg.sender;
         peerNum++;
 

@@ -103,26 +103,14 @@
 				"type": "string"
 			},
 			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "PeerId",
-						"type": "string"
-					},
-					{
-						"internalType": "string[]",
-						"name": "AddressList",
-						"type": "string[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "valid",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct IPFS.Peer",
-				"name": "_peer",
-				"type": "tuple"
+				"internalType": "string",
+				"name": "peerId",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "addressList",
+				"type": "string[]"
 			}
 		],
 		"name": "addPeer",

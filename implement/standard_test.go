@@ -47,10 +47,10 @@ func TestApi_InitPeer(t *testing.T) {
 	peer, err := a.GetPeer(peerId)
 	fmt.Println(peer)
 
-	err = a.RemovePeer()
+	/*err = a.RemovePeer()
 	if err != nil {
 		t.Fatal(err)
-	}
+	}*/
 }
 
 func TestApi_RemovePeer(t *testing.T) {
