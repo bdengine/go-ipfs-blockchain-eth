@@ -150,3 +150,38 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 		}
 	}
 }
+
+func waitResultWithoutEvent(ctx context.Context, sCli *ethclient.Client, txId common.Hash) error {
+	tick := time.Tick(2 * time.Second)
+	for {
+		select {
+		case <-tick:
+			log.Debugln("未收到成功事件,轮询回执")
+			receipt, err := sCli.TransactionReceipt(context.Background(), txId)
+			if err != nil {
+				if err.Error() == "not found" {
+					log.Debugf("交易结果不确定,继续轮询")
+				}
+			} else if receipt.Status == 0 {
+				return fmt.Errorf("交易失败")
+			} else {
+				log.Debugln("交易成功")
+				return nil
+			}
+		case <-ctx.Done():
+			log.Debugln("交易超时，最后一次查询回执")
+			receipt, err := sCli.TransactionReceipt(context.Background(), txId)
+			if err != nil {
+				if err.Error() == "not found" {
+					return fmt.Errorf("交易执行结果不确定,请稍候查询")
+				}
+				return err
+			}
+			if receipt.Status == 0 {
+				return fmt.Errorf("交易失败")
+			}
+			log.Debugln("交易成功")
+			return nil
+		}
+	}
+}

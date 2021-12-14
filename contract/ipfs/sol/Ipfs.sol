@@ -21,8 +21,6 @@ contract IPFS {
         bool valid;
     }
 
-
-
     // 合约拥有者
     address public owner;
     // erc20合约
@@ -36,6 +34,32 @@ contract IPFS {
     uint public peerNum;
     mapping(string => address) public pidAddrMap;
 
+    mapping(string => Authority) public fileMap;
+
+
+    event Success(string indexed uid);
+
+
+    modifier IsOwner(){
+        require(msg.sender == owner);
+        _;
+    }
+
+    modifier IsFileOwner(string calldata _cid){
+        require(fileMap[_cid].owner==address(0) || fileMap[_cid].owner == msg.sender,"file is already exist and you are not owner");
+        _;
+    }
+
+    modifier FileNotExist(string calldata _cid){
+        require(fileMap[_cid].owner==address(0),"file is already exist and you are not owner");
+        _;
+    }
+
+    modifier FileExist(string calldata _cid){
+        require(fileMap[_cid].owner!=address(0),"file not exist");
+        _;
+    }
+
     modifier PeerExist{
         require(addrPeerMap[msg.sender].valid,"ipfs peer no exist");
         _;
@@ -44,6 +68,31 @@ contract IPFS {
     modifier PeerNotExist{
         require(!addrPeerMap[msg.sender].valid,"ipfs peer already exist");
         _;
+    }
+
+
+    constructor(uint256 _price,address _token){
+        owner = msg.sender;
+        price = _price;
+        tokenContract = SCToken(_token);
+    }
+
+    function SetOwner(address _to) IsOwner public {
+        owner = _to;
+    }
+
+    function SetToken(address _token) IsOwner public {
+        tokenContract = SCToken(_token);
+    }
+
+    function SetPrice(uint256 _price) IsOwner public {
+        price = _price;
+    }
+
+    function withdraw(string calldata uid,uint wad) IsOwner external {
+        bool pay = tokenContract.transferFrom(address(this),owner,wad);
+        require(pay,"pay failed");
+        emit Success(uid);
     }
 
     function getPeerList(uint num) public view returns (Peer[] memory) {
@@ -100,12 +149,12 @@ contract IPFS {
         emit Success(uid);
     }
 
-    function addPeer(string calldata uid,string calldata PeerId, string[] calldata AddressList) PeerNotExist external {
+    function addPeer(string calldata uid,string calldata peerId, string[] calldata addressList) PeerNotExist external {
         peerList[msg.sender] = head;
         head = msg.sender;
 
-        addrPeerMap[msg.sender] = Peer(peerId,AddressList,true);
-        pidAddrMap[_peer.PeerId] = msg.sender;
+        addrPeerMap[msg.sender] = Peer(peerId,addressList,true);
+        pidAddrMap[peerId] = msg.sender;
         peerNum++;
 
         emit Success(uid);
@@ -133,29 +182,33 @@ contract IPFS {
         emit Success(uid);
     }
 
-
-
-    mapping(string => Authority) public fileMap;
-
-    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 wad) IsFileOwner(cid) external payable {
+    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 wad) FileNotExist(cid) external payable {
         require(wad > 0,"require wad > 0");
+        require(size > 0,"");
 
         bool pay = tokenContract.transferFrom(msg.sender,address(this),wad);
         require(pay,"pay failed");
 
-
-        uint256 bNum =  block.number;
-        if (fileMap[cid].expireBlock > block.number){
-            bNum = fileMap[cid].expireBlock;
-        }
-
-        if (fileMap[cid].size > 0) {
-            size = fileMap[cid].size;
-        }
-
-        uint256  _expire = bNum+wad/(size*price);
+        uint256  _expire = block.number+wad/(size*price);
         fileMap[cid] = Authority(msg.sender,size,_expire);
 
+        emit Success(uid);
+    }
+
+
+    function rechargeFile(string calldata uid, string calldata cid, uint256 wad) FileExist(cid) external payable {
+        require(wad > 0,"require wad > 0");
+        bool pay = tokenContract.transferFrom(msg.sender,address(this),wad);
+        require(pay,"pay failed");
+
+        uint256 bNum =  block.number;
+        uint256 blocksNum = wad/(fileMap[cid].size*price);
+
+        if (fileMap[cid].expireBlock > block.number){
+            fileMap[cid].expireBlock+= blocksNum;
+        }else{
+            fileMap[cid].expireBlock= blocksNum+bNum;
+        }
         emit Success(uid);
     }
 
@@ -170,46 +223,6 @@ contract IPFS {
         // TODO 是否应该设置此项？
         fileMap[cid].owner = address(0);
 
-        emit Success(uid);
-    }
-
-
-
-
-    event Success(string indexed uid);
-
-
-    modifier IsOwner(){
-        require(msg.sender == owner);
-        _;
-    }
-
-    modifier IsFileOwner(string calldata _cid){
-        require(fileMap[_cid].owner==address(0) || fileMap[_cid].owner == msg.sender,"file is already exist and you are not owner");
-        _;
-    }
-
-    constructor(uint256 _price,address _token){
-        owner = msg.sender;
-        price = _price;
-        tokenContract = SCToken(_token);
-    }
-
-    function SetOwner(address _to) IsOwner public {
-        owner = _to;
-    }
-
-    function SetToken(address _token) IsOwner public {
-        tokenContract = SCToken(_token);
-    }
-
-    function SetPrice(uint256 _price) IsOwner public {
-        price = _price;
-    }
-
-    function withdraw(string calldata uid,uint wad) IsOwner external {
-        bool pay = tokenContract.transferFrom(address(this),owner,wad);
-        require(pay,"pay failed");
         emit Success(uid);
     }
 }

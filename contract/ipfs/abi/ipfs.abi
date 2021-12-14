@@ -357,6 +357,29 @@
 				"internalType": "string",
 				"name": "cid",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "wad",
+				"type": "uint256"
+			}
+		],
+		"name": "rechargeFile",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "uid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cid",
+				"type": "string"
 			}
 		],
 		"name": "removeFile",
