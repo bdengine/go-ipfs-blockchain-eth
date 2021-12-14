@@ -86,7 +86,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "wad",
+				"name": "blockNum",
 				"type": "uint256"
 			}
 		],
@@ -360,7 +360,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "wad",
+				"name": "blockNum",
 				"type": "uint256"
 			}
 		],

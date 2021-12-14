@@ -182,32 +182,31 @@ contract IPFS {
         emit Success(uid);
     }
 
-    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 wad) FileNotExist(cid) external payable {
-        require(wad > 0,"require wad > 0");
+    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum) FileNotExist(cid) external payable {
+        require(blockNum > 0,"require blockNum > 0");
         require(size > 0,"");
+        uint256 wad = blockNum*price*size;
 
         bool pay = tokenContract.transferFrom(msg.sender,address(this),wad);
         require(pay,"pay failed");
 
-        uint256  _expire = block.number+wad/(size*price);
+        uint256  _expire = block.number+blockNum;
         fileMap[cid] = Authority(msg.sender,size,_expire);
 
         emit Success(uid);
     }
 
 
-    function rechargeFile(string calldata uid, string calldata cid, uint256 wad) FileExist(cid) external payable {
-        require(wad > 0,"require wad > 0");
+    function rechargeFile(string calldata uid, string calldata cid, uint256 blockNum) FileExist(cid) external payable {
+        require(blockNum > 0,"require blockNum > 0");
+        uint256 wad = price*fileMap[cid].size*blockNum;
         bool pay = tokenContract.transferFrom(msg.sender,address(this),wad);
         require(pay,"pay failed");
 
-        uint256 bNum =  block.number;
-        uint256 blocksNum = wad/(fileMap[cid].size*price);
-
         if (fileMap[cid].expireBlock > block.number){
-            fileMap[cid].expireBlock+= blocksNum;
+            fileMap[cid].expireBlock+= blockNum;
         }else{
-            fileMap[cid].expireBlock= blocksNum+bNum;
+            fileMap[cid].expireBlock= blockNum+block.number;
         }
         emit Success(uid);
     }

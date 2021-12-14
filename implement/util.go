@@ -22,6 +22,8 @@ const (
 
 type ExecuteIpfsFunc func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error)
 
+type ExecuteFunc func(opts *bind.TransactOpts) (*types.Transaction, error)
+
 func GetIpfsContract(url string, addr string) (*ethclient.Client, *ipfs.Ipfs, error) {
 	httpClient, err := ethclient.Dial(url)
 	if err != nil {
@@ -108,6 +110,23 @@ func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) e
 		return err
 	}
 	return nil
+}
+
+func (a *peerImpl) ExecuteTransact(ctx context.Context, sCli *ethclient.Client, f ExecuteFunc) error {
+	// 生成配置项
+	opts, err := a.GenTransactOpts(ctx, sCli, defaultGasLimit)
+	if err != nil {
+		return err
+	}
+	// 执行交易方法
+	tx, err := f(opts)
+	if err != nil {
+		return err
+	}
+
+	ctx, _ = context.WithTimeout(ctx, a.Variable.RequestTimeout*time.Second)
+	log.Debugf("%v交易结果查询：", tx.Hash())
+	return waitResultWithoutEvent(ctx, sCli, tx.Hash())
 }
 
 func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.IpfsSuccess, sub event.Subscription, txId common.Hash, uid string) error {
