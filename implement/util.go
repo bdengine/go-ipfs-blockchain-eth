@@ -45,12 +45,12 @@ func GetSCTokenContract(url string, addr string) (*ethclient.Client, *scToken.Sc
 }
 
 // GenTransactOpts 生成默认交易配置项
-func (a *api) GenTransactOpts(ctx context.Context, sCli *ethclient.Client) (*bind.TransactOpts, error) {
-	opts, err := bind.NewKeyedTransactorWithChainID(a.ID.priKey, a.Chain.chainId)
+func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client) (*bind.TransactOpts, error) {
+	opts, err := bind.NewKeyedTransactorWithChainID(a.priKey, a.chainId)
 	if err != nil {
 		return nil, err
 	}
-	nonce, err := sCli.PendingNonceAt(ctx, a.ID.address)
+	nonce, err := sCli.PendingNonceAt(ctx, a.address)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (a *api) GenTransactOpts(ctx context.Context, sCli *ethclient.Client) (*bin
 }
 
 // ExecuteIpfsTransact 执行交易,等待返回成功与否
-func (a *api) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error {
+func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error {
 	// 获取客户端和合约实例
 	sCli, contract, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
 	if err != nil {
@@ -91,7 +91,7 @@ func (a *api) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error {
 		return err
 	}
 
-	ctx, _ = context.WithTimeout(ctx, a.Config.RequestTimeout*time.Second)
+	ctx, _ = context.WithTimeout(ctx, a.Variable.RequestTimeout*time.Second)
 
 	// todo 日志
 	log.Debugf("%v交易结果查询：", tx.Hash())

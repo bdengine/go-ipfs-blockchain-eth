@@ -24,7 +24,7 @@ func TestNewApi(t *testing.T) {
 	fmt.Println(string(indent))
 }
 
-var a *api
+var a *peerImpl
 var peerId string = "test1"
 
 func init() {
