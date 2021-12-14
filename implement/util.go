@@ -91,11 +91,15 @@ func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteFunc) error
 		return err
 	}
 
-	ctx, _ = context.WithTimeout(ctx, a.Variable.RequestTimeout*time.Second)
-
+	ctx, cancel := context.WithTimeout(ctx, a.Variable.RequestTimeout*time.Second)
 	// todo 日志
 	log.Debugf("%v交易结果查询：", tx.Hash())
-	return waitResult(ctx, sCli, sch, sub, tx.Hash(), uid)
+	err = waitResult(ctx, sCli, sch, sub, tx.Hash(), uid)
+	cancel()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.IpfsSuccess, sub event.Subscription, txId common.Hash, uid string) error {
