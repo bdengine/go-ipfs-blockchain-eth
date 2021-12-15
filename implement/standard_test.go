@@ -60,6 +60,25 @@ func TestApi_RemovePeer(t *testing.T) {
 	}
 }
 
+func TestPeerImpl_AddFile(t *testing.T) {
+	info := model.IpfsFileInfo{
+		Cid:       "cid3",
+		Size:      100,
+		StoreDays: 10,
+	}
+	err := a.AddFile(info)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestPeerImpl_RechargeFile(t *testing.T) {
+	err := a.RechargeFile("cid3", 30)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestEvent(t *testing.T) {
 	_, contract, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
 	if err != nil {
