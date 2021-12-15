@@ -78,6 +78,7 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	// 检查配置项是否完整
 	err = checkConfig(&cfg)
 	if err != nil {
+		panic(err)
 		return nil, err
 	}
 
@@ -99,7 +100,7 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	// 更新pid
 	if cfg.ID.Pid != peerId {
 		cfg.ID.Pid = peerId
-		marshal, err := json.MarshalIndent(a, "", "  ")
+		marshal, err := json.MarshalIndent(cfg, "", "\t")
 		if err != nil {
 			return nil, err
 		}
