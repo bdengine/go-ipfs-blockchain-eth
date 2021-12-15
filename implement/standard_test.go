@@ -79,6 +79,13 @@ func TestPeerImpl_RechargeFile(t *testing.T) {
 	}
 }
 
+func TestPeerImpl_DeleteFile(t *testing.T) {
+	err := a.DeleteFile("cid3")
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestEvent(t *testing.T) {
 	_, contract, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
 	if err != nil {
