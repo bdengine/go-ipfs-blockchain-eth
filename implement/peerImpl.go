@@ -44,6 +44,7 @@ type Identity struct {
 
 type configInfo struct {
 	RequestTimeout time.Duration
+	GasLimit       uint64
 }
 
 type config struct {
@@ -134,6 +135,9 @@ func checkConfig(a *config) error {
 
 	if a.Variable.RequestTimeout == 0 {
 		a.Variable.RequestTimeout = defaultTimeout
+	}
+	if a.Variable.GasLimit == 0 {
+		a.Variable.GasLimit = defaultGasLimit
 	}
 
 	if a.ID.Pid == "" || a.ID.PriKey == "" {

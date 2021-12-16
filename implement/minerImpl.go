@@ -7,6 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
 	"github.com/ipfs/go-ipfs-auth/standard/model"
+	"github.com/ipfs/go-ipfs-auth/standard/standardConst"
 )
 
 func (a *peerImpl) GetChallenge() (string, error) {
@@ -16,6 +17,9 @@ func (a *peerImpl) GetChallenge() (string, error) {
 	}
 	defer cli.Close()
 	challenge, _, err := contr.GetChallenge(nil)
+	if challenge == "" {
+		return challenge, standardConst.ChallengeError
+	}
 	return challenge, err
 }
 

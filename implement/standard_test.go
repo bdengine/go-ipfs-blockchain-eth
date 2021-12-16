@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
 	"github.com/ipfs/go-ipfs-auth/standard/model"
+	"math/bits"
 	"testing"
 )
 
@@ -171,4 +172,39 @@ func TestDefaultConfig(t *testing.T) {
 	}
 	fmt.Println(string(indent))
 
+}
+
+func ZeroPrefixLen(id []byte) int {
+	for i, b := range id {
+		if b != 0 {
+			return i*8 + bits.LeadingZeros8(uint8(b))
+		}
+	}
+	return len(id) * 8
+}
+
+func XOR(a, b []byte) []byte {
+	c := make([]byte, len(a))
+	for i := 0; i < len(a); i++ {
+		c[i] = a[i] ^ b[i]
+	}
+	return c
+}
+
+func CommonPrefixLen(a, b []byte) int {
+	c := make([]byte, len(a))
+	for i := 0; i < len(a); i++ {
+		c[i] = a[i] ^ b[i]
+	}
+	for i, by := range c {
+		if by != 0 {
+			return i*8 + bits.LeadingZeros8(uint8(by))
+		}
+	}
+	return len(c) * 8
+}
+
+func Test_CommonPrefixLen(t *testing.T) {
+	ba, bb := []byte{0, 2, 3}, []byte{127, 2, 4}
+	fmt.Println(CommonPrefixLen(ba, bb))
 }

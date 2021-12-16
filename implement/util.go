@@ -68,7 +68,7 @@ func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, 
 	opts.Value = big.NewInt(0)
 
 	if gasLimit == 0 {
-		gasLimit = 300000
+		gasLimit = defaultGasLimit
 	}
 	opts.GasLimit = gasLimit // in units
 	opts.GasPrice = gasPrice
@@ -91,7 +91,7 @@ func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) e
 	}
 	defer sub.Unsubscribe()
 	// 生成配置项
-	opts, err := a.GenTransactOpts(ctx, sCli, defaultGasLimit)
+	opts, err := a.GenTransactOpts(ctx, sCli, a.config.Variable.GasLimit)
 	if err != nil {
 		return err
 	}
