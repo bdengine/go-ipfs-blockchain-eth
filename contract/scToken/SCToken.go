@@ -30,7 +30,7 @@ var (
 
 // ScTokenMetaData contains all meta data concerning the ScToken contract.
 var ScTokenMetaData = &bind.MetaData{
-	ABI: "[{\"constant\":false,\"inputs\":[{\"name\":\"guy\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"guy\",\"type\":\"address\"}],\"name\":\"approve\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"guy\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"guy\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"src\",\"type\":\"address\"},{\"name\":\"dst\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"move\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"src\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"pull\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"dst\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"push\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"authority_\",\"type\":\"address\"}],\"name\":\"setAuthority\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"challenge_\",\"type\":\"string\"}],\"name\":\"setChallenge\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"name_\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"owner_\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"start\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"stop\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"dst\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"src\",\"type\":\"address\"},{\"name\":\"dst\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"symbol_\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"src\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"src\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"dst\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Mint\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Burn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Stop\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Start\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"SetChallenge\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"address\"}],\"name\":\"Print\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"authority\",\"type\":\"address\"}],\"name\":\"LogSetAuthority\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"LogSetOwner\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"authority\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getChallenge\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"stopped\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"symbol_\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"src\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Burn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"authority\",\"type\":\"address\"}],\"name\":\"LogSetAuthority\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"LogSetOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Mint\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"cge\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"cgeSeq\",\"type\":\"uint256\"}],\"name\":\"SetChallenge\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Start\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Stop\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"src\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"dst\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"}],\"name\":\"approveSelf\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"authority\",\"outputs\":[{\"internalType\":\"contractDSAuthority\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"burnSelf\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getChallenge\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"guy\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"mintSelf\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"src\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"dst\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"move\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"src\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"pull\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"dst\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"push\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"contractDSAuthority\",\"name\":\"authority_\",\"type\":\"address\"}],\"name\":\"setAuthority\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"challenge_\",\"type\":\"string\"}],\"name\":\"setChallenge\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name_\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner_\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"start\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"stop\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"stopped\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"dst\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"src\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"dst\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // ScTokenABI is the input ABI used to generate the binding from.
@@ -511,67 +511,67 @@ func (_ScToken *ScTokenTransactorSession) Approve(guy common.Address, wad *big.I
 	return _ScToken.Contract.Approve(&_ScToken.TransactOpts, guy, wad)
 }
 
-// Approve0 is a paid mutator transaction binding the contract method 0xdaea85c5.
+// ApproveSelf is a paid mutator transaction binding the contract method 0x0c6d27ae.
 //
-// Solidity: function approve(address guy) returns(bool)
-func (_ScToken *ScTokenTransactor) Approve0(opts *bind.TransactOpts, guy common.Address) (*types.Transaction, error) {
-	return _ScToken.contract.Transact(opts, "approve0", guy)
+// Solidity: function approveSelf(address guy) returns(bool)
+func (_ScToken *ScTokenTransactor) ApproveSelf(opts *bind.TransactOpts, guy common.Address) (*types.Transaction, error) {
+	return _ScToken.contract.Transact(opts, "approveSelf", guy)
 }
 
-// Approve0 is a paid mutator transaction binding the contract method 0xdaea85c5.
+// ApproveSelf is a paid mutator transaction binding the contract method 0x0c6d27ae.
 //
-// Solidity: function approve(address guy) returns(bool)
-func (_ScToken *ScTokenSession) Approve0(guy common.Address) (*types.Transaction, error) {
-	return _ScToken.Contract.Approve0(&_ScToken.TransactOpts, guy)
+// Solidity: function approveSelf(address guy) returns(bool)
+func (_ScToken *ScTokenSession) ApproveSelf(guy common.Address) (*types.Transaction, error) {
+	return _ScToken.Contract.ApproveSelf(&_ScToken.TransactOpts, guy)
 }
 
-// Approve0 is a paid mutator transaction binding the contract method 0xdaea85c5.
+// ApproveSelf is a paid mutator transaction binding the contract method 0x0c6d27ae.
 //
-// Solidity: function approve(address guy) returns(bool)
-func (_ScToken *ScTokenTransactorSession) Approve0(guy common.Address) (*types.Transaction, error) {
-	return _ScToken.Contract.Approve0(&_ScToken.TransactOpts, guy)
+// Solidity: function approveSelf(address guy) returns(bool)
+func (_ScToken *ScTokenTransactorSession) ApproveSelf(guy common.Address) (*types.Transaction, error) {
+	return _ScToken.Contract.ApproveSelf(&_ScToken.TransactOpts, guy)
 }
 
-// Burn is a paid mutator transaction binding the contract method 0x42966c68.
-//
-// Solidity: function burn(uint256 wad) returns()
-func (_ScToken *ScTokenTransactor) Burn(opts *bind.TransactOpts, wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.contract.Transact(opts, "burn", wad)
-}
-
-// Burn is a paid mutator transaction binding the contract method 0x42966c68.
-//
-// Solidity: function burn(uint256 wad) returns()
-func (_ScToken *ScTokenSession) Burn(wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.Contract.Burn(&_ScToken.TransactOpts, wad)
-}
-
-// Burn is a paid mutator transaction binding the contract method 0x42966c68.
-//
-// Solidity: function burn(uint256 wad) returns()
-func (_ScToken *ScTokenTransactorSession) Burn(wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.Contract.Burn(&_ScToken.TransactOpts, wad)
-}
-
-// Burn0 is a paid mutator transaction binding the contract method 0x9dc29fac.
+// Burn is a paid mutator transaction binding the contract method 0x9dc29fac.
 //
 // Solidity: function burn(address guy, uint256 wad) returns()
-func (_ScToken *ScTokenTransactor) Burn0(opts *bind.TransactOpts, guy common.Address, wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.contract.Transact(opts, "burn0", guy, wad)
+func (_ScToken *ScTokenTransactor) Burn(opts *bind.TransactOpts, guy common.Address, wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.contract.Transact(opts, "burn", guy, wad)
 }
 
-// Burn0 is a paid mutator transaction binding the contract method 0x9dc29fac.
+// Burn is a paid mutator transaction binding the contract method 0x9dc29fac.
 //
 // Solidity: function burn(address guy, uint256 wad) returns()
-func (_ScToken *ScTokenSession) Burn0(guy common.Address, wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.Contract.Burn0(&_ScToken.TransactOpts, guy, wad)
+func (_ScToken *ScTokenSession) Burn(guy common.Address, wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.Contract.Burn(&_ScToken.TransactOpts, guy, wad)
 }
 
-// Burn0 is a paid mutator transaction binding the contract method 0x9dc29fac.
+// Burn is a paid mutator transaction binding the contract method 0x9dc29fac.
 //
 // Solidity: function burn(address guy, uint256 wad) returns()
-func (_ScToken *ScTokenTransactorSession) Burn0(guy common.Address, wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.Contract.Burn0(&_ScToken.TransactOpts, guy, wad)
+func (_ScToken *ScTokenTransactorSession) Burn(guy common.Address, wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.Contract.Burn(&_ScToken.TransactOpts, guy, wad)
+}
+
+// BurnSelf is a paid mutator transaction binding the contract method 0xb8b12a1e.
+//
+// Solidity: function burnSelf(uint256 wad) returns()
+func (_ScToken *ScTokenTransactor) BurnSelf(opts *bind.TransactOpts, wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.contract.Transact(opts, "burnSelf", wad)
+}
+
+// BurnSelf is a paid mutator transaction binding the contract method 0xb8b12a1e.
+//
+// Solidity: function burnSelf(uint256 wad) returns()
+func (_ScToken *ScTokenSession) BurnSelf(wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.Contract.BurnSelf(&_ScToken.TransactOpts, wad)
+}
+
+// BurnSelf is a paid mutator transaction binding the contract method 0xb8b12a1e.
+//
+// Solidity: function burnSelf(uint256 wad) returns()
+func (_ScToken *ScTokenTransactorSession) BurnSelf(wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.Contract.BurnSelf(&_ScToken.TransactOpts, wad)
 }
 
 // Mint is a paid mutator transaction binding the contract method 0x40c10f19.
@@ -595,25 +595,25 @@ func (_ScToken *ScTokenTransactorSession) Mint(guy common.Address, wad *big.Int)
 	return _ScToken.Contract.Mint(&_ScToken.TransactOpts, guy, wad)
 }
 
-// Mint0 is a paid mutator transaction binding the contract method 0xa0712d68.
+// MintSelf is a paid mutator transaction binding the contract method 0x720eacad.
 //
-// Solidity: function mint(uint256 wad) returns()
-func (_ScToken *ScTokenTransactor) Mint0(opts *bind.TransactOpts, wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.contract.Transact(opts, "mint0", wad)
+// Solidity: function mintSelf(uint256 wad) returns()
+func (_ScToken *ScTokenTransactor) MintSelf(opts *bind.TransactOpts, wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.contract.Transact(opts, "mintSelf", wad)
 }
 
-// Mint0 is a paid mutator transaction binding the contract method 0xa0712d68.
+// MintSelf is a paid mutator transaction binding the contract method 0x720eacad.
 //
-// Solidity: function mint(uint256 wad) returns()
-func (_ScToken *ScTokenSession) Mint0(wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.Contract.Mint0(&_ScToken.TransactOpts, wad)
+// Solidity: function mintSelf(uint256 wad) returns()
+func (_ScToken *ScTokenSession) MintSelf(wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.Contract.MintSelf(&_ScToken.TransactOpts, wad)
 }
 
-// Mint0 is a paid mutator transaction binding the contract method 0xa0712d68.
+// MintSelf is a paid mutator transaction binding the contract method 0x720eacad.
 //
-// Solidity: function mint(uint256 wad) returns()
-func (_ScToken *ScTokenTransactorSession) Mint0(wad *big.Int) (*types.Transaction, error) {
-	return _ScToken.Contract.Mint0(&_ScToken.TransactOpts, wad)
+// Solidity: function mintSelf(uint256 wad) returns()
+func (_ScToken *ScTokenTransactorSession) MintSelf(wad *big.Int) (*types.Transaction, error) {
+	return _ScToken.Contract.MintSelf(&_ScToken.TransactOpts, wad)
 }
 
 // Move is a paid mutator transaction binding the contract method 0xbb35783b.
@@ -1579,140 +1579,6 @@ func (_ScToken *ScTokenFilterer) ParseMint(log types.Log) (*ScTokenMint, error) 
 	return event, nil
 }
 
-// ScTokenPrintIterator is returned from FilterPrint and is used to iterate over the raw logs and unpacked data for Print events raised by the ScToken contract.
-type ScTokenPrintIterator struct {
-	Event *ScTokenPrint // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *ScTokenPrintIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(ScTokenPrint)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(ScTokenPrint)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *ScTokenPrintIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *ScTokenPrintIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// ScTokenPrint represents a Print event raised by the ScToken contract.
-type ScTokenPrint struct {
-	Arg0 common.Address
-	Raw  types.Log // Blockchain specific contextual infos
-}
-
-// FilterPrint is a free log retrieval operation binding the contract event 0xa8e608801119a422405d57e76518f793d972b389576b43d2e40d59d4dde10ff7.
-//
-// Solidity: event Print(address arg0)
-func (_ScToken *ScTokenFilterer) FilterPrint(opts *bind.FilterOpts) (*ScTokenPrintIterator, error) {
-
-	logs, sub, err := _ScToken.contract.FilterLogs(opts, "Print")
-	if err != nil {
-		return nil, err
-	}
-	return &ScTokenPrintIterator{contract: _ScToken.contract, event: "Print", logs: logs, sub: sub}, nil
-}
-
-// WatchPrint is a free log subscription operation binding the contract event 0xa8e608801119a422405d57e76518f793d972b389576b43d2e40d59d4dde10ff7.
-//
-// Solidity: event Print(address arg0)
-func (_ScToken *ScTokenFilterer) WatchPrint(opts *bind.WatchOpts, sink chan<- *ScTokenPrint) (event.Subscription, error) {
-
-	logs, sub, err := _ScToken.contract.WatchLogs(opts, "Print")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(ScTokenPrint)
-				if err := _ScToken.contract.UnpackLog(event, "Print", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParsePrint is a log parse operation binding the contract event 0xa8e608801119a422405d57e76518f793d972b389576b43d2e40d59d4dde10ff7.
-//
-// Solidity: event Print(address arg0)
-func (_ScToken *ScTokenFilterer) ParsePrint(log types.Log) (*ScTokenPrint, error) {
-	event := new(ScTokenPrint)
-	if err := _ScToken.contract.UnpackLog(event, "Print", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 // ScTokenSetChallengeIterator is returned from FilterSetChallenge and is used to iterate over the raw logs and unpacked data for SetChallenge events raised by the ScToken contract.
 type ScTokenSetChallengeIterator struct {
 	Event *ScTokenSetChallenge // Event containing the contract specifics and raw log
@@ -1782,14 +1648,14 @@ func (it *ScTokenSetChallengeIterator) Close() error {
 
 // ScTokenSetChallenge represents a SetChallenge event raised by the ScToken contract.
 type ScTokenSetChallenge struct {
-	Arg0 string
-	Arg1 *big.Int
-	Raw  types.Log // Blockchain specific contextual infos
+	Cge    string
+	CgeSeq *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
 }
 
 // FilterSetChallenge is a free log retrieval operation binding the contract event 0x9bf2941793efdd6f6157187773c27e7ead5a4c62a79e7434488ef13d3b21c856.
 //
-// Solidity: event SetChallenge(string arg0, uint256 arg1)
+// Solidity: event SetChallenge(string cge, uint256 cgeSeq)
 func (_ScToken *ScTokenFilterer) FilterSetChallenge(opts *bind.FilterOpts) (*ScTokenSetChallengeIterator, error) {
 
 	logs, sub, err := _ScToken.contract.FilterLogs(opts, "SetChallenge")
@@ -1801,7 +1667,7 @@ func (_ScToken *ScTokenFilterer) FilterSetChallenge(opts *bind.FilterOpts) (*ScT
 
 // WatchSetChallenge is a free log subscription operation binding the contract event 0x9bf2941793efdd6f6157187773c27e7ead5a4c62a79e7434488ef13d3b21c856.
 //
-// Solidity: event SetChallenge(string arg0, uint256 arg1)
+// Solidity: event SetChallenge(string cge, uint256 cgeSeq)
 func (_ScToken *ScTokenFilterer) WatchSetChallenge(opts *bind.WatchOpts, sink chan<- *ScTokenSetChallenge) (event.Subscription, error) {
 
 	logs, sub, err := _ScToken.contract.WatchLogs(opts, "SetChallenge")
@@ -1838,7 +1704,7 @@ func (_ScToken *ScTokenFilterer) WatchSetChallenge(opts *bind.WatchOpts, sink ch
 
 // ParseSetChallenge is a log parse operation binding the contract event 0x9bf2941793efdd6f6157187773c27e7ead5a4c62a79e7434488ef13d3b21c856.
 //
-// Solidity: event SetChallenge(string arg0, uint256 arg1)
+// Solidity: event SetChallenge(string cge, uint256 cgeSeq)
 func (_ScToken *ScTokenFilterer) ParseSetChallenge(log types.Log) (*ScTokenSetChallenge, error) {
 	event := new(ScTokenSetChallenge)
 	if err := _ScToken.contract.UnpackLog(event, "SetChallenge", log); err != nil {

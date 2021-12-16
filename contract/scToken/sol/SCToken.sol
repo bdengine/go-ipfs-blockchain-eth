@@ -1,3 +1,6 @@
+/// token.sol -- ERC20 implementation with minting and burning
+
+// Copyright (C) 2015, 2016, 2017  DappHub, LLC
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,12 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity >=0.4.23;
+pragma solidity >=0.4.23 <0.5.18;
 
 import "./math.sol";
 import "./auth.sol";
 
-contract SCToken is DSMath, DSAuth {
+contract scToken is DSMath, DSAuth {
     bool                                              public  stopped;
     uint256                                           public  totalSupply;
     mapping (address => uint256)                      public  balanceOf;
@@ -40,9 +43,7 @@ contract SCToken is DSMath, DSAuth {
     event Burn(address indexed guy, uint wad);
     event Stop();
     event Start();
-    event SetChallenge(string, uint256);
-
-    event Print(address);
+    event SetChallenge(string cge, uint256 cgeSeq);
 
     modifier stoppable {
         require(!stopped, "ds-stop-is-stopped");
@@ -54,13 +55,13 @@ contract SCToken is DSMath, DSAuth {
         _;
     }
 
-    function setChallenge(string challenge_) external  hasChallenge auth {
+    function setChallenge(string calldata challenge_) external  hasChallenge auth {
         challenge = challenge_;
         challengeSeq = block.number / 600 + 1;
         emit SetChallenge(challenge, challengeSeq);
     }
 
-    function getChallenge() public view returns (string, uint256) {
+    function getChallenge() public view returns (string memory, uint256) {
         if (challengeSeq > 0 && block.number > (challengeSeq - 1) * 600 && block.number <= challengeSeq * 600){
             return (challenge, challengeSeq);
         }
@@ -68,7 +69,7 @@ contract SCToken is DSMath, DSAuth {
 
     }
 
-    function approve(address guy) external returns (bool) {
+    function approveSelf(address guy) external returns (bool) {
         return approve(guy, uint(-1));
     }
 
@@ -116,11 +117,11 @@ contract SCToken is DSMath, DSAuth {
     }
 
 
-    function mint(uint wad) external {
+    function mintSelf(uint wad) external {
         mint(msg.sender, wad);
     }
 
-    function burn(uint wad) external {
+    function burnSelf(uint wad) external {
         burn(msg.sender, wad);
     }
 
