@@ -9,11 +9,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
+	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/scToken"
 	"github.com/ipfs/go-ipfs-auth/standard/model"
 	"io/ioutil"
 	"math/big"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -61,6 +64,13 @@ type peerImpl struct {
 	priKey  *ecdsa.PrivateKey
 	address common.Address
 	chainId *big.Int
+	lock    sync.Locker
+
+	socketClient  *ethclient.Client
+	ipfsContract  *ipfs.Ipfs
+	tokenContract *scToken.ScToken
+
+	httpClient *ethclient.Client
 }
 
 func NewApi(configRoot string, peerId string) (*peerImpl, error) {
@@ -117,6 +127,29 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	}
 
 	a.config = &cfg
+	httpClient, err := ethclient.Dial(a.Client.HttpUrl)
+	if err != nil {
+		return nil, err
+	}
+	socketClient, err := ethclient.Dial(a.Client.SocketUrl)
+	if err != nil {
+		return nil, err
+	}
+
+	a.socketClient = socketClient
+	a.httpClient = httpClient
+	a.lock = &sync.Mutex{}
+
+	ipfsContra, err := ipfs.NewIpfs(common.HexToAddress(a.ContractMap[contractIpfs].ContractAddr), socketClient)
+	if err != nil {
+		return nil, err
+	}
+	a.ipfsContract = ipfsContra
+	tokenContra, err := scToken.NewScToken(common.HexToAddress(a.ContractMap[contractToken].ContractAddr), socketClient)
+	if err != nil {
+		return nil, err
+	}
+	a.tokenContract = tokenContra
 	return &a, err
 }
 
@@ -149,6 +182,13 @@ func checkConfig(a *config) error {
 func (a *peerImpl) InitPeer(peer model.CorePeer) error {
 	ctx := context.Background()
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
+		p, err := contract.AddrPeerMap(nil, a.address)
+		if err != nil {
+			return nil, err
+		}
+		if p.Valid {
+			return nil, fmt.Errorf("节点存在")
+		}
 		return contract.AddPeer(opts, uid, peer.PeerId, peer.Addresses)
 	}
 	// 执行交易
@@ -166,4 +206,18 @@ func (a *peerImpl) RemovePeer() error {
 
 func (a *peerImpl) DaemonPeer() error {
 	return nil
+}
+
+func (a *peerImpl) GetSocketClient() (*ethclient.Client, error) {
+	if a.socketClient == nil {
+		return nil, fmt.Errorf("nil client")
+	}
+	return a.socketClient, nil
+}
+
+func (a *peerImpl) GetHttpClient() (*ethclient.Client, error) {
+	if a.httpClient == nil {
+		return nil, fmt.Errorf("nil client")
+	}
+	return a.httpClient, nil
 }

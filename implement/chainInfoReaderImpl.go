@@ -6,13 +6,10 @@ import (
 )
 
 func (a *peerImpl) GetPeerList(num int) ([]model.CorePeer, error) {
-	httpClient, contract, err := GetIpfsContract(a.Client.HttpUrl, a.ContractMap[contractIpfs].ContractAddr)
+	list, err := a.ipfsContract.GetPeerList(nil, big.NewInt(int64(num)))
 	if err != nil {
 		return nil, err
 	}
-	defer httpClient.Close()
-
-	list, err := contract.GetPeerList(nil, big.NewInt(int64(num)))
 	res := make([]model.CorePeer, len(list))
 	for i, peer := range list {
 		res[i] = model.CorePeer{
@@ -30,12 +27,7 @@ func (a *peerImpl) GetUserCode() (string, error) {
 
 func (a *peerImpl) GetPeer(id string) (model.CorePeer, error) {
 	res := model.CorePeer{PeerId: id}
-	cli, contract, err := GetIpfsContract(a.Client.HttpUrl, a.ContractMap[contractIpfs].ContractAddr)
-	if err != nil {
-		return res, err
-	}
-	defer cli.Close()
-	peer, err := contract.GetPeerByPid(nil, id)
+	peer, err := a.ipfsContract.GetPeerByPid(nil, id)
 	if err != nil {
 		return res, err
 	}

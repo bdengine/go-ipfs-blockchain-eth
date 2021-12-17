@@ -66,7 +66,6 @@ contract scToken is DSMath, DSAuth {
             return (challenge, challengeSeq);
         }
         return ("",challengeSeq);
-
     }
 
     function approveSelf(address guy) external returns (bool) {

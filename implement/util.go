@@ -18,13 +18,15 @@ import (
 
 const (
 	defaultGasLimit = 300000
+	txStatusFail    = 0
 )
 
 type ExecuteIpfsFunc func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error)
+type ExecuteTokenFunc func(uid string, contract *scToken.ScToken, opts *bind.TransactOpts) (*types.Transaction, error)
 
 type ExecuteFunc func(opts *bind.TransactOpts) (*types.Transaction, error)
 
-func GetIpfsContract(url string, addr string) (*ethclient.Client, *ipfs.Ipfs, error) {
+func GenNewIpfsContract(url string, addr string) (*ethclient.Client, *ipfs.Ipfs, error) {
 	httpClient, err := ethclient.Dial(url)
 	if err != nil {
 		return nil, nil, err
@@ -37,7 +39,7 @@ func GetIpfsContract(url string, addr string) (*ethclient.Client, *ipfs.Ipfs, er
 	return httpClient, contract, nil
 }
 
-func GetSCTokenContract(url string, addr string) (*ethclient.Client, *scToken.ScToken, error) {
+func GenNewSCTokenContract(url string, addr string) (*ethclient.Client, *scToken.ScToken, error) {
 	httpClient, err := ethclient.Dial(url)
 	if err != nil {
 		return nil, nil, err
@@ -56,6 +58,7 @@ func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, 
 	if err != nil {
 		return nil, err
 	}
+	a.lock.Lock()
 	nonce, err := sCli.PendingNonceAt(ctx, a.address)
 	if err != nil {
 		return nil, err
@@ -78,25 +81,20 @@ func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, 
 // ExecuteIpfsTransact 执行交易,等待返回成功与否
 func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) error {
 	// 获取客户端和合约实例
-	sCli, contract, err := GetIpfsContract(a.Client.SocketUrl, a.ContractMap[contractIpfs].ContractAddr)
-	if err != nil {
-		return err
-	}
-	defer sCli.Close()
 	uid := uuid.New().String()
 	sch := make(chan *ipfs.IpfsSuccess)
-	sub, err := contract.IpfsFilterer.WatchSuccess(nil, sch, []string{})
+	sub, err := a.ipfsContract.IpfsFilterer.WatchSuccess(nil, sch, []string{uid})
 	if err != nil {
 		return err
 	}
 	defer sub.Unsubscribe()
 	// 生成配置项
-	opts, err := a.GenTransactOpts(ctx, sCli, a.config.Variable.GasLimit)
+	opts, err := a.GenTransactOpts(ctx, a.socketClient, a.config.Variable.GasLimit)
 	if err != nil {
 		return err
 	}
 	// 执行交易方法
-	tx, err := f(uid, contract, opts)
+	tx, err := f(uid, a.ipfsContract, opts)
 	if err != nil {
 		return err
 	}
@@ -104,7 +102,8 @@ func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) e
 	ctx, cancel := context.WithTimeout(ctx, a.Variable.RequestTimeout*time.Second)
 	// todo 日志
 	log.Debugf("%v交易结果查询：", tx.Hash())
-	err = waitResult(ctx, sCli, sch, sub, tx.Hash(), uid)
+	a.lock.Unlock()
+	err = waitResult(ctx, a.socketClient, sch, sub, tx.Hash(), uid)
 	cancel()
 	if err != nil {
 		return err
@@ -134,8 +133,9 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 	var err error
 	for {
 		select {
-		case <-sch:
+		case s := <-sch:
 			log.Debugf("成功回调:%s", uid)
+			fmt.Println(s.Raw.BlockNumber)
 			return nil
 		case err = <-sub.Err():
 			return err
@@ -146,10 +146,12 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 				if err.Error() == "not found" {
 					log.Debugf("交易结果不确定,继续轮询")
 				}
-			} else if receipt.Status == 0 {
+			} else if receipt.Status == txStatusFail {
 				return fmt.Errorf("交易失败")
 			} else {
+				fmt.Println(receipt.BlockNumber)
 				log.Debugln("交易成功")
+				fmt.Println(receipt.BlockNumber)
 				return nil
 			}
 		case <-ctx.Done():
@@ -161,7 +163,8 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 				}
 				return err
 			}
-			if receipt.Status == 0 {
+			fmt.Println(receipt.BlockNumber)
+			if receipt.Status == txStatusFail {
 				return fmt.Errorf("交易失败")
 			}
 			log.Debugln("交易成功")
@@ -181,7 +184,7 @@ func waitResultWithoutEvent(ctx context.Context, sCli *ethclient.Client, txId co
 				if err.Error() == "not found" {
 					log.Debugf("交易结果不确定,继续轮询")
 				}
-			} else if receipt.Status == 0 {
+			} else if receipt.Status == txStatusFail {
 				return fmt.Errorf("交易失败")
 			} else {
 				log.Debugln("交易成功")
@@ -196,7 +199,7 @@ func waitResultWithoutEvent(ctx context.Context, sCli *ethclient.Client, txId co
 				}
 				return err
 			}
-			if receipt.Status == 0 {
+			if receipt.Status == txStatusFail {
 				return fmt.Errorf("交易失败")
 			}
 			log.Debugln("交易成功")
