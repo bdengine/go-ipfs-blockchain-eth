@@ -222,8 +222,8 @@ func Test_quickTen(t *testing.T) {
 		"a5e8ac9f7c4500beb0cce0c27dc15ff38ac7dbc2009438a93c3ac3600f336d2b",
 		"29da35b897f0ccfc385decbf6093f06cbba6c8c27182966c62bdeecc0748ba9b",
 		"d40b837f3988666b70d3232007785324a9a5ef8471707dbaa188a931f8de97f9",
-		"223805033fe03d4a84c2a524c6b9fa0c459b65baa82e83af0e6ff504f7f92dfd",
 		"234d7249ea68e55aece81bfc4d008a2f8b37b2796e0e026b1d03d101c1f5c396",
+		"223805033fe03d4a84c2a524c6b9fa0c459b65baa82e83af0e6ff504f7f92dfd",
 	}
 	apiList, err := BatchNewApi(configRoot+"/test", pk)
 	if err != nil {
@@ -234,7 +234,7 @@ func Test_quickTen(t *testing.T) {
 	start := time.Now().Unix()
 	for _, impl := range apiList {
 		go func() {
-			for i := 0; i < 1; i++ {
+			for i := 0; i < times; i++ {
 				go func() {
 					e := impl.testToken()
 					eCh <- e == nil

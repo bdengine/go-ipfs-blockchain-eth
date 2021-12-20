@@ -12,7 +12,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
-	"time"
 )
 
 func (a *peerImpl) GetChallenge() (string, error) {
@@ -21,6 +20,13 @@ func (a *peerImpl) GetChallenge() (string, error) {
 		return challenge, standardConst.ChallengeError
 	}
 	return challenge, err
+}
+
+type miningResponse struct {
+	Code    int         `json:"code,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
+	Message string      `json:"message,omitempty"`
+	Success bool        `json:"success,omitempty"`
 }
 
 func (a *peerImpl) Mining(m model.IpfsMining) error {
@@ -33,8 +39,15 @@ func (a *peerImpl) Mining(m model.IpfsMining) error {
 	}
 	res, err := sendRequest(string(marshal), a.CentralServerUrl)
 	fmt.Println(string(res))
-	fmt.Println(time.Now())
-	return err
+	var r miningResponse
+	err = json.Unmarshal(res, &r)
+	if err != nil {
+		return err
+	}
+	if !r.Success {
+		return fmt.Errorf(r.Message)
+	}
+	return nil
 }
 
 func sendRequest(body string, url string) ([]byte, error) {
