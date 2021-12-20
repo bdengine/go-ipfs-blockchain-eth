@@ -10,9 +10,12 @@ abstract contract SCToken {
 
 contract IPFS {
     struct Authority {
+        // 文件拥有者,文件存储付费者
         address owner;
         uint256 size;
-        uint256  expireBlock;
+        uint256 expireBlock;
+        // 上传文件的节点的链上身份,可以和owner相同
+        address uploader;
     }
 
     struct Peer {
@@ -182,12 +185,13 @@ contract IPFS {
         emit Success(uid);
     }
 
-    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum, address _owner) FileNotExist(cid) external payable {
+    // TODO 与erc20合约合并后需要改动
+    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum, string _owner) FileNotExist(cid) external payable {
         require(blockNum > 0,"require blockNum > 0");
         require(size > 0,"");
         uint256 wad = blockNum*price*size;
 
-        bool pay = tokenContract.transferFrom(_owner,address(this),wad);
+        bool pay = tokenContract.transferFrom(_owner,owner,wad);
         require(pay,"pay failed");
 
         uint256  _expire = block.number+blockNum;
