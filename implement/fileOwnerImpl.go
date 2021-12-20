@@ -24,7 +24,7 @@ func (a *peerImpl) AddFile(info model.IpfsFileInfo) error {
 		if file.Owner != common.HexToAddress("") {
 			return nil, fmt.Errorf("文件已存在")
 		}
-		return contract.AddFile(opts, uid, info.Cid, big.NewInt(info.Size), blockNum)
+		return contract.AddFile(opts, uid, info.Cid, big.NewInt(info.Size), blockNum, common.HexToAddress(info.Owner))
 	}
 
 	// 执行交易

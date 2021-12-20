@@ -182,16 +182,16 @@ contract IPFS {
         emit Success(uid);
     }
 
-    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum) FileNotExist(cid) external payable {
+    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum, address _owner) FileNotExist(cid) external payable {
         require(blockNum > 0,"require blockNum > 0");
         require(size > 0,"");
         uint256 wad = blockNum*price*size;
 
-        bool pay = tokenContract.transferFrom(msg.sender,address(this),wad);
+        bool pay = tokenContract.transferFrom(_owner,address(this),wad);
         require(pay,"pay failed");
 
         uint256  _expire = block.number+blockNum;
-        fileMap[cid] = Authority(msg.sender,size,_expire);
+        fileMap[cid] = Authority(_owner,size,_expire);
 
         emit Success(uid);
     }

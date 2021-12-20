@@ -88,6 +88,11 @@
 				"internalType": "uint256",
 				"name": "blockNum",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
 			}
 		],
 		"name": "addFile",

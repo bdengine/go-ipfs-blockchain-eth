@@ -48,7 +48,6 @@ type Identity struct {
 type configInfo struct {
 	RequestTimeout time.Duration
 	GasLimit       uint64
-	MiningTicker   time.Duration
 }
 
 type config struct {
