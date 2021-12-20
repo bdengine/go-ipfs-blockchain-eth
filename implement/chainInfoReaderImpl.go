@@ -17,7 +17,6 @@ func (a *peerImpl) GetPeerList(num int) ([]model.CorePeer, error) {
 			Addresses: peer.AddressList,
 		}
 	}
-
 	return res, nil
 }
 
