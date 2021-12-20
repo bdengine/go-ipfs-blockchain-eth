@@ -38,7 +38,9 @@ func (a *peerImpl) Mining(m model.IpfsMining) error {
 		return err
 	}
 	res, err := sendRequest(string(marshal), a.CentralServerUrl)
-	fmt.Println(string(res))
+	if err != nil {
+		return err
+	}
 	var r miningResponse
 	err = json.Unmarshal(res, &r)
 	if err != nil {
