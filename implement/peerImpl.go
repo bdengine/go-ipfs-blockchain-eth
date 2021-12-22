@@ -1,3 +1,5 @@
+/*github.com/ipfs/go-ipfs-auth/standard  interface各接口实现层
+ */
 package implement
 
 import (

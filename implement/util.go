@@ -114,7 +114,6 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 				}
 				return err
 			}
-			fmt.Println(receipt.BlockNumber)
 			if receipt.Status == txStatusFail {
 				return fmt.Errorf("交易失败")
 			}

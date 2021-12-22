@@ -8,6 +8,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/google/uuid"
+	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
+	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/scToken"
 	"github.com/ipfs/go-ipfs-auth/standard/model"
 	"github.com/prometheus/common/log"
 	"math/bits"
@@ -21,45 +23,85 @@ const (
 )
 
 func TestNewApi(t *testing.T) {
-	indent, err := json.MarshalIndent(a, "", "\t")
+	indent, err := json.MarshalIndent(mockPeer, "", "\t")
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(string(indent))
 }
 
-var a *peerImpl
-var peerId string = "12D3KooWLUTBUkLnfdcJbyV1C7ZRsdFcDoN89mmYknFH5ef9pTyM"
+var mockPeer *peerImpl = &peerImpl{
+	config: &config{
+		Client: clientInfo{
+			HttpUrl:   "http://39.108.194.46:8545",
+			SocketUrl: "ws://39.108.194.46:8546",
+		},
+		CentralServerUrl: "http://192.168.70.37:8091/ipfsMid/index/verify",
+		ContractMap: map[string]contractInfo{
+			"ipfs":  {"0x7334B7D92fF253F4462eCA1629581B241455b482"},
+			"token": {"0x7334B7D92fF253F4462eCA1629581B241455b482"},
+		},
+		Chain: chainInfo{ChainId: 18888},
+		Variable: configInfo{
+			RequestTimeout: 30,
+			GasLimit:       0,
+		},
+		ID: Identity{
+			Pid:    "12D3KooWLUTBUkLnfdcJbyV1C7ZRsdFcDoN89mmYknFH5ef9pTyM",
+			PriKey: "268a086d68c0ca3181e2726f9f3878add1af94a18a58a181b075114396f7f8be",
+		},
+	},
+	priKey:        nil,
+	address:       common.Address{},
+	chainId:       nil,
+	lock:          nil,
+	socketClient:  nil,
+	ipfsContract:  nil,
+	tokenContract: nil,
+	httpClient:    nil,
+}
 
 func init() {
-	test, err := NewApi(configRoot, peerId)
+	httpClient, err := ethclient.Dial(mockPeer.Client.HttpUrl)
 	if err != nil {
 		panic(err)
 	}
-	a = test
-	a.lock = &sync.Mutex{}
+	socketClient, err := ethclient.Dial(mockPeer.Client.SocketUrl)
+	if err != nil {
+		panic(err)
+	}
+
+	mockPeer.socketClient = socketClient
+	mockPeer.httpClient = httpClient
+	mockPeer.lock = &sync.Mutex{}
+
+	ipfsContra, err := ipfs.NewIpfs(common.HexToAddress(mockPeer.ContractMap[contractIpfs].ContractAddr), socketClient)
+	if err != nil {
+		panic(err)
+	}
+	mockPeer.ipfsContract = ipfsContra
+	tokenContra, err := scToken.NewScToken(common.HexToAddress(mockPeer.ContractMap[contractToken].ContractAddr), socketClient)
+	if err != nil {
+		panic(err)
+	}
+	mockPeer.tokenContract = tokenContra
 }
 
 func TestApi_InitPeer(t *testing.T) {
-	err := a.InitPeer(model.CorePeer{
-		PeerId:    a.ID.Pid,
+	err := mockPeer.InitPeer(model.CorePeer{
+		PeerId:    mockPeer.ID.Pid,
 		Addresses: []string{"address1", "address2"},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	peer, err := a.GetPeer(peerId)
+	peer, err := mockPeer.GetPeer("12D3KooWLUTBUkLnfdcJbyV1C7ZRsdFcDoN89mmYknFH5ef9pTyM")
 	fmt.Println(peer)
-
-	/*err = a.RemovePeer()
-	if err != nil {
-		t.Fatal(err)
-	}*/
 }
 
 func TestApi_RemovePeer(t *testing.T) {
-	err := a.RemovePeer()
+	err := mockPeer.RemovePeer()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -71,14 +113,14 @@ func TestPeerImpl_AddFile(t *testing.T) {
 		Size:      100,
 		StoreDays: 10,
 	}
-	err := a.AddFile(info)
+	err := mockPeer.AddFile(info)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 
 func TestPeerImpl_RechargeFile(t *testing.T) {
-	err := a.RechargeFile("cid3", 30)
+	err := mockPeer.RechargeFile("cid3", 30)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -89,7 +131,7 @@ func Test_quick(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func() {
-			err := a.RechargeFile("cid3", 1)
+			err := mockPeer.RechargeFile("cid3", 1)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -102,7 +144,7 @@ func Test_quick(t *testing.T) {
 func TestPeerImpl_GetPeer(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		go func() {
-			pid, err := a.ipfsContract.GetPeerByPid(nil, peerId)
+			pid, err := mockPeer.ipfsContract.GetPeerByPid(nil, "12D3KooWLUTBUkLnfdcJbyV1C7ZRsdFcDoN89mmYknFH5ef9pTyM")
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -113,7 +155,7 @@ func TestPeerImpl_GetPeer(t *testing.T) {
 }
 
 func TestPeerImpl_DeleteFile(t *testing.T) {
-	err := a.DeleteFile("cid3")
+	err := mockPeer.DeleteFile("cid3")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -121,21 +163,21 @@ func TestPeerImpl_DeleteFile(t *testing.T) {
 
 func TestApi_AddFile(t *testing.T) {
 	cid := "testFile1"
-	err := a.AddFile(model.IpfsFileInfo{
+	err := mockPeer.AddFile(model.IpfsFileInfo{
 		Cid: cid,
 		Uid: uuid.New().String(),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = a.DeleteFile(cid)
+	err = mockPeer.DeleteFile(cid)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 
 func TestApi_RemoveFile(t *testing.T) {
-	err := a.DeleteFile("testFile1")
+	err := mockPeer.DeleteFile("testFile1")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,14 +215,14 @@ func TestPeerImpl_Mining(t *testing.T) {
 		LeadingZero: 0,
 		Challenge:   "this is a test",
 	}
-	err := a.Mining(mining)
+	err := mockPeer.Mining(mining)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 
 func TestPeerImpl_GetChallenge(t *testing.T) {
-	challenge, err := a.GetChallenge()
+	challenge, err := mockPeer.GetChallenge()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +232,7 @@ func TestPeerImpl_GetChallenge(t *testing.T) {
 }
 
 func TestGetTxByHash(t *testing.T) {
-	httpClient, err := ethclient.Dial(a.Client.HttpUrl)
+	httpClient, err := ethclient.Dial(mockPeer.Client.HttpUrl)
 	if err != nil {
 		t.Fatal(err)
 	}
