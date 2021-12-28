@@ -97,7 +97,7 @@
 		],
 		"name": "addFile",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -171,6 +171,11 @@
 				"internalType": "uint256",
 				"name": "expireBlock",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "uploader",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -371,7 +376,7 @@
 		],
 		"name": "rechargeFile",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -389,7 +394,7 @@
 		],
 		"name": "removeFile",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

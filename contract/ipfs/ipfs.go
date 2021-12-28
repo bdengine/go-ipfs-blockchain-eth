@@ -37,7 +37,7 @@ type IPFSPeer struct {
 
 // IpfsMetaData contains all meta data concerning the Ipfs contract.
 var IpfsMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"Success\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"SetOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"SetPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"SetToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"peerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"addPeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrPeerMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"fileMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireBlock\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"pid\",\"type\":\"string\"}],\"name\":\"getPeerByPid\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getPeerList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"head\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"peerHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"peerList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peerNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"pidAddrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"}],\"name\":\"rechargeFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"removeFile\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"removePeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"updateAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"Success\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"SetOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"SetPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"SetToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"peerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"addPeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrPeerMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"fileMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireBlock\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"uploader\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"pid\",\"type\":\"string\"}],\"name\":\"getPeerByPid\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getPeerList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"head\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"peerHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"peerList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peerNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"pidAddrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"}],\"name\":\"rechargeFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"removeFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"removePeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"updateAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // IpfsABI is the input ABI used to generate the binding from.
@@ -233,11 +233,12 @@ func (_Ipfs *IpfsCallerSession) AddrPeerMap(arg0 common.Address) (struct {
 
 // FileMap is a free data retrieval call binding the contract method 0x167e3841.
 //
-// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock)
+// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock, address uploader)
 func (_Ipfs *IpfsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
 	Owner       common.Address
 	Size        *big.Int
 	ExpireBlock *big.Int
+	Uploader    common.Address
 }, error) {
 	var out []interface{}
 	err := _Ipfs.contract.Call(opts, &out, "fileMap", arg0)
@@ -246,6 +247,7 @@ func (_Ipfs *IpfsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
 		Owner       common.Address
 		Size        *big.Int
 		ExpireBlock *big.Int
+		Uploader    common.Address
 	})
 	if err != nil {
 		return *outstruct, err
@@ -254,6 +256,7 @@ func (_Ipfs *IpfsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
 	outstruct.Owner = *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
 	outstruct.Size = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
 	outstruct.ExpireBlock = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
+	outstruct.Uploader = *abi.ConvertType(out[3], new(common.Address)).(*common.Address)
 
 	return *outstruct, err
 
@@ -261,22 +264,24 @@ func (_Ipfs *IpfsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
 
 // FileMap is a free data retrieval call binding the contract method 0x167e3841.
 //
-// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock)
+// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock, address uploader)
 func (_Ipfs *IpfsSession) FileMap(arg0 string) (struct {
 	Owner       common.Address
 	Size        *big.Int
 	ExpireBlock *big.Int
+	Uploader    common.Address
 }, error) {
 	return _Ipfs.Contract.FileMap(&_Ipfs.CallOpts, arg0)
 }
 
 // FileMap is a free data retrieval call binding the contract method 0x167e3841.
 //
-// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock)
+// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock, address uploader)
 func (_Ipfs *IpfsCallerSession) FileMap(arg0 string) (struct {
 	Owner       common.Address
 	Size        *big.Int
 	ExpireBlock *big.Int
+	Uploader    common.Address
 }, error) {
 	return _Ipfs.Contract.FileMap(&_Ipfs.CallOpts, arg0)
 }
@@ -594,21 +599,21 @@ func (_Ipfs *IpfsTransactorSession) SetToken(_token common.Address) (*types.Tran
 
 // AddFile is a paid mutator transaction binding the contract method 0xc0f645b2.
 //
-// Solidity: function addFile(string uid, string cid, uint256 size, uint256 blockNum, address _owner) payable returns()
+// Solidity: function addFile(string uid, string cid, uint256 size, uint256 blockNum, address _owner) returns()
 func (_Ipfs *IpfsTransactor) AddFile(opts *bind.TransactOpts, uid string, cid string, size *big.Int, blockNum *big.Int, _owner common.Address) (*types.Transaction, error) {
 	return _Ipfs.contract.Transact(opts, "addFile", uid, cid, size, blockNum, _owner)
 }
 
 // AddFile is a paid mutator transaction binding the contract method 0xc0f645b2.
 //
-// Solidity: function addFile(string uid, string cid, uint256 size, uint256 blockNum, address _owner) payable returns()
+// Solidity: function addFile(string uid, string cid, uint256 size, uint256 blockNum, address _owner) returns()
 func (_Ipfs *IpfsSession) AddFile(uid string, cid string, size *big.Int, blockNum *big.Int, _owner common.Address) (*types.Transaction, error) {
 	return _Ipfs.Contract.AddFile(&_Ipfs.TransactOpts, uid, cid, size, blockNum, _owner)
 }
 
 // AddFile is a paid mutator transaction binding the contract method 0xc0f645b2.
 //
-// Solidity: function addFile(string uid, string cid, uint256 size, uint256 blockNum, address _owner) payable returns()
+// Solidity: function addFile(string uid, string cid, uint256 size, uint256 blockNum, address _owner) returns()
 func (_Ipfs *IpfsTransactorSession) AddFile(uid string, cid string, size *big.Int, blockNum *big.Int, _owner common.Address) (*types.Transaction, error) {
 	return _Ipfs.Contract.AddFile(&_Ipfs.TransactOpts, uid, cid, size, blockNum, _owner)
 }
@@ -657,42 +662,42 @@ func (_Ipfs *IpfsTransactorSession) PeerHeartbeat(uid string) (*types.Transactio
 
 // RechargeFile is a paid mutator transaction binding the contract method 0x39429038.
 //
-// Solidity: function rechargeFile(string uid, string cid, uint256 blockNum) payable returns()
+// Solidity: function rechargeFile(string uid, string cid, uint256 blockNum) returns()
 func (_Ipfs *IpfsTransactor) RechargeFile(opts *bind.TransactOpts, uid string, cid string, blockNum *big.Int) (*types.Transaction, error) {
 	return _Ipfs.contract.Transact(opts, "rechargeFile", uid, cid, blockNum)
 }
 
 // RechargeFile is a paid mutator transaction binding the contract method 0x39429038.
 //
-// Solidity: function rechargeFile(string uid, string cid, uint256 blockNum) payable returns()
+// Solidity: function rechargeFile(string uid, string cid, uint256 blockNum) returns()
 func (_Ipfs *IpfsSession) RechargeFile(uid string, cid string, blockNum *big.Int) (*types.Transaction, error) {
 	return _Ipfs.Contract.RechargeFile(&_Ipfs.TransactOpts, uid, cid, blockNum)
 }
 
 // RechargeFile is a paid mutator transaction binding the contract method 0x39429038.
 //
-// Solidity: function rechargeFile(string uid, string cid, uint256 blockNum) payable returns()
+// Solidity: function rechargeFile(string uid, string cid, uint256 blockNum) returns()
 func (_Ipfs *IpfsTransactorSession) RechargeFile(uid string, cid string, blockNum *big.Int) (*types.Transaction, error) {
 	return _Ipfs.Contract.RechargeFile(&_Ipfs.TransactOpts, uid, cid, blockNum)
 }
 
 // RemoveFile is a paid mutator transaction binding the contract method 0x99f553dc.
 //
-// Solidity: function removeFile(string uid, string cid) payable returns()
+// Solidity: function removeFile(string uid, string cid) returns()
 func (_Ipfs *IpfsTransactor) RemoveFile(opts *bind.TransactOpts, uid string, cid string) (*types.Transaction, error) {
 	return _Ipfs.contract.Transact(opts, "removeFile", uid, cid)
 }
 
 // RemoveFile is a paid mutator transaction binding the contract method 0x99f553dc.
 //
-// Solidity: function removeFile(string uid, string cid) payable returns()
+// Solidity: function removeFile(string uid, string cid) returns()
 func (_Ipfs *IpfsSession) RemoveFile(uid string, cid string) (*types.Transaction, error) {
 	return _Ipfs.Contract.RemoveFile(&_Ipfs.TransactOpts, uid, cid)
 }
 
 // RemoveFile is a paid mutator transaction binding the contract method 0x99f553dc.
 //
-// Solidity: function removeFile(string uid, string cid) payable returns()
+// Solidity: function removeFile(string uid, string cid) returns()
 func (_Ipfs *IpfsTransactorSession) RemoveFile(uid string, cid string) (*types.Transaction, error) {
 	return _Ipfs.Contract.RemoveFile(&_Ipfs.TransactOpts, uid, cid)
 }

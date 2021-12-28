@@ -1,5 +1,4 @@
-/*github.com/ipfs/go-ipfs-auth/standard  interface各接口实现层
- */
+// Package implement /github.com/ipfs/go-ipfs-auth/standard  interface各接口实现
 package implement
 
 import (
@@ -75,6 +74,7 @@ type peerImpl struct {
 	httpClient *ethclient.Client
 }
 
+// NewApi 初始化一个peerImpl实例
 func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	fileName := configRoot + configFileName
 	readFile, err := ioutil.ReadFile(fileName)
