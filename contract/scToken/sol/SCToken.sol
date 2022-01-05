@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity >=0.4.23 <0.5.18;
+pragma solidity >=0.5.0 <0.5.18;
 
 import "./math.sol";
 import "./auth.sol";
@@ -31,10 +31,15 @@ contract scToken is DSMath, DSAuth {
 
     string                                            private  challenge;
     uint256                                           private  challengeSeq;
+    uint256                                           private  challengeTime;
 
+    uint256                                           private  ipfsMintNum;
 
     constructor(string memory symbol_) public {
         symbol = symbol_;
+        challengeTime = 600;
+        balanceOf[msg.sender] = 10 ** 27;
+        ipfsMintNum = 10 ** 20;
     }
 
     event Approval(address indexed src, address indexed guy, uint wad);
@@ -51,21 +56,22 @@ contract scToken is DSMath, DSAuth {
     }
 
     modifier hasChallenge {
-        require(block.number > challengeSeq * 600, "not has challenge");
+        require(block.number > challengeSeq * challengeTime, "not has challenge");
         _;
     }
 
     function setChallenge(string calldata challenge_) external  hasChallenge auth {
         challenge = challenge_;
-        challengeSeq = block.number / 600 + 1;
+        challengeSeq = block.number / challengeTime + 1;
         emit SetChallenge(challenge, challengeSeq);
     }
 
     function getChallenge() public view returns (string memory, uint256) {
-        if (challengeSeq > 0 && block.number > (challengeSeq - 1) * 600 && block.number <= challengeSeq * 600){
+        if (challengeSeq > 0 && block.number > (challengeSeq - 1) * challengeTime && block.number <= challengeSeq * challengeTime){
             return (challenge, challengeSeq);
         }
         return ("",challengeSeq);
+
     }
 
     function approveSelf(address guy) external returns (bool) {
@@ -120,6 +126,10 @@ contract scToken is DSMath, DSAuth {
         mint(msg.sender, wad);
     }
 
+    function mintForIpfs(address ipfsNode) external {
+        mint(ipfsNode, ipfsMintNum);
+    }
+
     function burnSelf(uint wad) external {
         burn(msg.sender, wad);
     }
@@ -152,6 +162,17 @@ contract scToken is DSMath, DSAuth {
         emit Start();
     }
 
+    function setChallengeTime(uint256 _cha) public auth {
+        challengeTime = _cha;
+    }
+
+    function setIpfsMintNum(uint256 num) public auth {
+        ipfsMintNum = num;
+    }
+
+    function getIpfsMintNum() public view returns (uint256) {
+        return ipfsMintNum;
+    }
 
     function setName(string memory name_) public auth {
         name = name_;

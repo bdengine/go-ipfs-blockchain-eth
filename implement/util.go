@@ -98,11 +98,10 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 					log.Debugf("交易结果不确定,继续轮询")
 				}
 			} else if receipt.Status == txStatusFail {
+				fmt.Printf("%+v\n", receipt)
 				return fmt.Errorf("交易失败")
 			} else {
-				fmt.Println(receipt.BlockNumber)
 				log.Debugln("交易成功")
-				fmt.Println(receipt.BlockNumber)
 				return nil
 			}
 		case <-ctx.Done():
@@ -115,6 +114,7 @@ func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.Ipfs
 				return err
 			}
 			if receipt.Status == txStatusFail {
+				fmt.Printf("%+v\n", receipt)
 				return fmt.Errorf("交易失败")
 			}
 			log.Debugln("交易成功")

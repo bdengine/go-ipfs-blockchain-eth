@@ -16,12 +16,18 @@ contract IPFS {
         uint256 expireBlock;
         // 上传文件的节点的链上身份,可以和owner相同
         address uploader;
+        uint256 id;
     }
 
     struct Peer {
         string PeerId;
         string[] AddressList;
         bool valid;
+    }
+
+    struct FileStore {
+        mapping(string => Authority)  fileMap;
+        string[] fileList;
     }
 
     // 合约拥有者
@@ -37,7 +43,10 @@ contract IPFS {
     uint public peerNum;
     mapping(string => address) public pidAddrMap;
 
-    mapping(string => Authority) public fileMap;
+
+    FileStore  private fileStore;
+
+
 
 
     event Success(string indexed uid);
@@ -49,17 +58,17 @@ contract IPFS {
     }
 
     modifier IsFileOwner(string calldata _cid){
-        require(fileMap[_cid].owner == address(0) || fileMap[_cid].owner == msg.sender, "file is already exist and you are not owner");
+        require(fileStore.fileMap[_cid].owner == address(0) || fileStore.fileMap[_cid].owner == msg.sender, "file is already exist and you are not owner");
         _;
     }
 
     modifier FileNotExist(string calldata _cid){
-        require(fileMap[_cid].owner == address(0), "file is already exist");
+        require(fileStore.fileMap[_cid].owner == address(0), "file is already exist");
         _;
     }
 
     modifier FileExist(string calldata _cid){
-        require(fileMap[_cid].owner != address(0), "file not exist");
+        require(fileStore.fileMap[_cid].owner != address(0), "file not exist");
         _;
     }
 
@@ -184,9 +193,11 @@ contract IPFS {
         emit Success(uid);
     }
 
+
+
     function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum, address _owner) FileNotExist(cid) external {
         require(blockNum > 0, "require blockNum > 0");
-        require(size > 0, "");
+        require(size > 0, "require size > 0");
         uint256 wad = blockNum * price * size;
 
         // 上传节点支付给本合约
@@ -194,36 +205,68 @@ contract IPFS {
         require(pay, "pay failed");
 
         uint256 _expire = block.number + blockNum;
-        fileMap[cid] = Authority(_owner, size, _expire, msg.sender);
+
+        fileStore.fileMap[cid] = Authority(_owner, size, _expire, msg.sender,fileStore.fileList.length);
+        fileStore.fileList.push(cid);
 
         emit Success(uid);
     }
 
     function rechargeFile(string calldata uid, string calldata cid, uint256 blockNum) FileExist(cid) external {
         require(blockNum > 0, "require blockNum > 0");
-        uint256 wad = price * fileMap[cid].size * blockNum;
+        uint256 wad = price * fileStore.fileMap[cid].size * blockNum;
         bool pay = tokenContract.transferFrom(msg.sender, address(this), wad);
         require(pay, "pay failed");
 
-        if (fileMap[cid].expireBlock > block.number) {
-            fileMap[cid].expireBlock += blockNum;
+        if (fileStore.fileMap[cid].expireBlock > block.number) {
+            fileStore.fileMap[cid].expireBlock += blockNum;
         } else {
-            fileMap[cid].expireBlock = blockNum + block.number;
+            fileStore.fileMap[cid].expireBlock = blockNum + block.number;
         }
         emit Success(uid);
     }
 
     function removeFile(string calldata uid, string calldata cid) IsFileOwner(cid) external {
-        if (fileMap[cid].expireBlock > block.number) {
-            uint256 wad = (fileMap[cid].expireBlock - block.number) * fileMap[cid].size * price;
+        if (fileStore.fileMap[cid].expireBlock > block.number) {
+            uint256 wad = (fileStore.fileMap[cid].expireBlock - block.number) * fileStore.fileMap[cid].size * price;
             bool pay = tokenContract.transferFrom(address(this), msg.sender, wad);
             require(pay, "pay failed");
         }
 
-        fileMap[cid].expireBlock = block.number;
+        fileStore.fileMap[cid].expireBlock = block.number;
         // TODO 是否应该设置此项？暂时保留此项，以避免文件删除后无法再次添加
-        fileMap[cid].owner = address(0);
+        fileStore.fileMap[cid].owner = address(0);
+
+        // 列表删除
+        uint256  _id = fileStore.fileMap[cid].id;
+        uint256  l = fileStore.fileList.length-1;
+
+        delete fileStore.fileList[_id];
+        fileStore.fileMap[fileStore.fileList[l]].id = _id;
+        fileStore.fileList[_id] =  fileStore.fileList[l];
+        fileStore.fileList.pop();
 
         emit Success(uid);
     }
+
+
+    function getFile(string calldata cid) view external returns (Authority memory){
+        return fileStore.fileMap[cid];
+    }
+
+    function getFileList(uint256 num)view external returns (string[] memory){
+        if (num == 0 || num > fileStore.fileList.length) {
+            num = fileStore.fileList.length;
+        }
+        string [] memory res = new string[](num);
+        for (uint i = 0; i < num; i++) {
+            res[i] = fileStore.fileList[i];
+        }
+        return res;
+    }
+
+    function checkFile(string calldata cid) view public returns (bool) {
+        return fileStore.fileMap[cid].owner == address(0);
+    }
+
 }

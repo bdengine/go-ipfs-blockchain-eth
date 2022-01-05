@@ -2,16 +2,19 @@ package implement
 
 import (
 	"context"
+	"crypto/ecdsa"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
 	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/scToken"
 	"github.com/ipfs/go-ipfs-auth/standard/model"
 	"github.com/prometheus/common/log"
+	"math/big"
 	"math/bits"
 	"sync"
 	"testing"
@@ -36,19 +39,19 @@ var mockPeer *peerImpl = &peerImpl{
 			HttpUrl:   "http://39.108.194.46:8545",
 			SocketUrl: "ws://39.108.194.46:8546",
 		},
-		CentralServerUrl: "http://192.168.70.37:8091/ipfsMid/index/verify",
+		CentralServerUrl: "",
 		ContractMap: map[string]contractInfo{
-			"ipfs":  {"0x7334B7D92fF253F4462eCA1629581B241455b482"},
-			"token": {"0x7334B7D92fF253F4462eCA1629581B241455b482"},
+			"ipfs":  {"0xf3Feb930E9f459Ee669D88363985cBDe259abADD"},
+			"token": {"0x22C43DBe403F1C60ee4e2c437D33e151E20Db22F"},
 		},
 		Chain: chainInfo{ChainId: 18888},
 		Variable: configInfo{
 			RequestTimeout: 30,
-			GasLimit:       0,
+			GasLimit:       250000,
 		},
 		ID: Identity{
-			Pid:    "12D3KooWLUTBUkLnfdcJbyV1C7ZRsdFcDoN89mmYknFH5ef9pTyM",
-			PriKey: "268a086d68c0ca3181e2726f9f3878add1af94a18a58a181b075114396f7f8be",
+			Pid:    "12D3KooWNpzDbLRwxtrw9W8yijeKvSs8epK8yHjEPoiGGj71rF4x",
+			PriKey: "3db74108afca5195374fd6ebdcfcdcd4ccc4338d4a70a8da36f693c995345e7e",
 		},
 	},
 	priKey:        nil,
@@ -85,6 +88,20 @@ func init() {
 		panic(err)
 	}
 	mockPeer.tokenContract = tokenContra
+	mockPeer.chainId = big.NewInt(mockPeer.Chain.ChainId)
+	priKey, err := crypto.HexToECDSA(mockPeer.ID.PriKey)
+	if err != nil {
+		panic(err)
+	}
+	mockPeer.priKey = priKey
+	pubKey := priKey.Public()
+	pubKeyECDSA, ok := pubKey.(*ecdsa.PublicKey)
+	if !ok {
+		panic(fmt.Errorf("公钥无法断言为类型 *ecdsa.PublicKey"))
+	}
+	address := crypto.PubkeyToAddress(*pubKeyECDSA)
+	fmt.Println(address.String())
+	mockPeer.address = address
 }
 
 func TestApi_InitPeer(t *testing.T) {
@@ -109,13 +126,27 @@ func TestApi_RemovePeer(t *testing.T) {
 
 func TestPeerImpl_AddFile(t *testing.T) {
 	info := model.IpfsFileInfo{
-		Cid:       "cid3",
-		Size:      100,
-		StoreDays: 10,
+		Cid:       "2",
+		Size:      1,
+		StoreDays: 1,
 	}
 	err := mockPeer.AddFile(info)
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestGetFile(t *testing.T) {
+	list, err := mockPeer.ipfsContract.GetFileList(nil, big.NewInt(0))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, s := range list {
+		file, err := mockPeer.ipfsContract.GetFile(nil, s)
+		if err != nil {
+			t.Fatal(err)
+		}
+		fmt.Printf("cid:%v,file:%v\n", s, file)
 	}
 }
 
@@ -155,7 +186,7 @@ func TestPeerImpl_GetPeer(t *testing.T) {
 }
 
 func TestPeerImpl_DeleteFile(t *testing.T) {
-	err := mockPeer.DeleteFile("cid3")
+	err := mockPeer.DeleteFile("2")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +268,7 @@ func TestGetTxByHash(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	h := common.HexToHash("0x1d822408666783084ca4d13464a2e805757b701179e7480fa7ddb697e54e8")
+	h := common.HexToHash("0xb8e9167f56d864076f1666bb1e6ee0e7e9eb14e7826233fca4a50c3d8bdcdb86")
 	receipt, err := httpClient.TransactionReceipt(context.Background(), h)
 	if err != nil {
 		t.Fatal(err)

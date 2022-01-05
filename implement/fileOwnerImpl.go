@@ -17,11 +17,11 @@ func (a *peerImpl) AddFile(info model.IpfsFileInfo) error {
 	blockNum := big.NewInt(info.StoreDays * 24 * 60 * 60)
 
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		file, err := contract.FileMap(nil, info.Cid)
+		canAdd, err := contract.CheckFile(nil, info.Cid)
 		if err != nil {
 			return nil, err
 		}
-		if file.Owner != common.HexToAddress("") {
+		if !canAdd {
 			return nil, fmt.Errorf("文件已存在")
 		}
 		var owner common.Address
@@ -30,6 +30,7 @@ func (a *peerImpl) AddFile(info model.IpfsFileInfo) error {
 		} else {
 			owner = common.HexToAddress(info.Owner)
 		}
+		// todo 检查balance和代扣额度
 		return contract.AddFile(opts, uid, info.Cid, big.NewInt(info.Size), blockNum, owner)
 	}
 
@@ -41,7 +42,7 @@ func (a *peerImpl) DeleteFile(cid string) error {
 	ctx := context.Background()
 
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		file, err := contract.FileMap(nil, cid)
+		file, err := contract.GetFile(nil, cid)
 		if err != nil {
 			return nil, err
 		}
@@ -60,7 +61,7 @@ func (a *peerImpl) RechargeFile(cid string, days int64) error {
 
 	// 执行充值方法
 	var rechargeFunc ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		file, err := contract.FileMap(nil, cid)
+		file, err := contract.GetFile(nil, cid)
 		if err != nil {
 			return nil, err
 		}

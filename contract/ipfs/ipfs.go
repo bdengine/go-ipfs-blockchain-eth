@@ -28,6 +28,15 @@ var (
 	_ = event.NewSubscription
 )
 
+// IPFSAuthority is an auto generated low-level Go binding around an user-defined struct.
+type IPFSAuthority struct {
+	Owner       common.Address
+	Size        *big.Int
+	ExpireBlock *big.Int
+	Uploader    common.Address
+	Id          *big.Int
+}
+
 // IPFSPeer is an auto generated low-level Go binding around an user-defined struct.
 type IPFSPeer struct {
 	PeerId      string
@@ -37,7 +46,7 @@ type IPFSPeer struct {
 
 // IpfsMetaData contains all meta data concerning the Ipfs contract.
 var IpfsMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"Success\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"SetOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"SetPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"SetToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"peerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"addPeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrPeerMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"fileMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireBlock\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"uploader\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"pid\",\"type\":\"string\"}],\"name\":\"getPeerByPid\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getPeerList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"head\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"peerHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"peerList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peerNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"pidAddrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"}],\"name\":\"rechargeFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"removeFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"removePeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"updateAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"Success\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"SetOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"}],\"name\":\"SetPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"}],\"name\":\"SetToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"addFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"peerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"addPeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addrPeerMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"checkFile\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"getFile\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireBlock\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"uploader\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"internalType\":\"structIPFS.Authority\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getFileList\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"pid\",\"type\":\"string\"}],\"name\":\"getPeerByPid\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getPeerList\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"PeerId\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"AddressList\",\"type\":\"string[]\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"internalType\":\"structIPFS.Peer[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"head\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"peerHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"peerList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"peerNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"pidAddrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"blockNum\",\"type\":\"uint256\"}],\"name\":\"rechargeFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"}],\"name\":\"removeFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"}],\"name\":\"removePeer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"addressList\",\"type\":\"string[]\"}],\"name\":\"updateAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // IpfsABI is the input ABI used to generate the binding from.
@@ -231,59 +240,97 @@ func (_Ipfs *IpfsCallerSession) AddrPeerMap(arg0 common.Address) (struct {
 	return _Ipfs.Contract.AddrPeerMap(&_Ipfs.CallOpts, arg0)
 }
 
-// FileMap is a free data retrieval call binding the contract method 0x167e3841.
+// CheckFile is a free data retrieval call binding the contract method 0x12df278f.
 //
-// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock, address uploader)
-func (_Ipfs *IpfsCaller) FileMap(opts *bind.CallOpts, arg0 string) (struct {
-	Owner       common.Address
-	Size        *big.Int
-	ExpireBlock *big.Int
-	Uploader    common.Address
-}, error) {
+// Solidity: function checkFile(string cid) view returns(bool)
+func (_Ipfs *IpfsCaller) CheckFile(opts *bind.CallOpts, cid string) (bool, error) {
 	var out []interface{}
-	err := _Ipfs.contract.Call(opts, &out, "fileMap", arg0)
+	err := _Ipfs.contract.Call(opts, &out, "checkFile", cid)
 
-	outstruct := new(struct {
-		Owner       common.Address
-		Size        *big.Int
-		ExpireBlock *big.Int
-		Uploader    common.Address
-	})
 	if err != nil {
-		return *outstruct, err
+		return *new(bool), err
 	}
 
-	outstruct.Owner = *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-	outstruct.Size = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
-	outstruct.ExpireBlock = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
-	outstruct.Uploader = *abi.ConvertType(out[3], new(common.Address)).(*common.Address)
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
 
-	return *outstruct, err
+	return out0, err
 
 }
 
-// FileMap is a free data retrieval call binding the contract method 0x167e3841.
+// CheckFile is a free data retrieval call binding the contract method 0x12df278f.
 //
-// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock, address uploader)
-func (_Ipfs *IpfsSession) FileMap(arg0 string) (struct {
-	Owner       common.Address
-	Size        *big.Int
-	ExpireBlock *big.Int
-	Uploader    common.Address
-}, error) {
-	return _Ipfs.Contract.FileMap(&_Ipfs.CallOpts, arg0)
+// Solidity: function checkFile(string cid) view returns(bool)
+func (_Ipfs *IpfsSession) CheckFile(cid string) (bool, error) {
+	return _Ipfs.Contract.CheckFile(&_Ipfs.CallOpts, cid)
 }
 
-// FileMap is a free data retrieval call binding the contract method 0x167e3841.
+// CheckFile is a free data retrieval call binding the contract method 0x12df278f.
 //
-// Solidity: function fileMap(string ) view returns(address owner, uint256 size, uint256 expireBlock, address uploader)
-func (_Ipfs *IpfsCallerSession) FileMap(arg0 string) (struct {
-	Owner       common.Address
-	Size        *big.Int
-	ExpireBlock *big.Int
-	Uploader    common.Address
-}, error) {
-	return _Ipfs.Contract.FileMap(&_Ipfs.CallOpts, arg0)
+// Solidity: function checkFile(string cid) view returns(bool)
+func (_Ipfs *IpfsCallerSession) CheckFile(cid string) (bool, error) {
+	return _Ipfs.Contract.CheckFile(&_Ipfs.CallOpts, cid)
+}
+
+// GetFile is a free data retrieval call binding the contract method 0xe0876aa8.
+//
+// Solidity: function getFile(string cid) view returns((address,uint256,uint256,address,uint256))
+func (_Ipfs *IpfsCaller) GetFile(opts *bind.CallOpts, cid string) (IPFSAuthority, error) {
+	var out []interface{}
+	err := _Ipfs.contract.Call(opts, &out, "getFile", cid)
+
+	if err != nil {
+		return *new(IPFSAuthority), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IPFSAuthority)).(*IPFSAuthority)
+
+	return out0, err
+
+}
+
+// GetFile is a free data retrieval call binding the contract method 0xe0876aa8.
+//
+// Solidity: function getFile(string cid) view returns((address,uint256,uint256,address,uint256))
+func (_Ipfs *IpfsSession) GetFile(cid string) (IPFSAuthority, error) {
+	return _Ipfs.Contract.GetFile(&_Ipfs.CallOpts, cid)
+}
+
+// GetFile is a free data retrieval call binding the contract method 0xe0876aa8.
+//
+// Solidity: function getFile(string cid) view returns((address,uint256,uint256,address,uint256))
+func (_Ipfs *IpfsCallerSession) GetFile(cid string) (IPFSAuthority, error) {
+	return _Ipfs.Contract.GetFile(&_Ipfs.CallOpts, cid)
+}
+
+// GetFileList is a free data retrieval call binding the contract method 0x31260d1e.
+//
+// Solidity: function getFileList(uint256 num) view returns(string[])
+func (_Ipfs *IpfsCaller) GetFileList(opts *bind.CallOpts, num *big.Int) ([]string, error) {
+	var out []interface{}
+	err := _Ipfs.contract.Call(opts, &out, "getFileList", num)
+
+	if err != nil {
+		return *new([]string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([]string)).(*[]string)
+
+	return out0, err
+
+}
+
+// GetFileList is a free data retrieval call binding the contract method 0x31260d1e.
+//
+// Solidity: function getFileList(uint256 num) view returns(string[])
+func (_Ipfs *IpfsSession) GetFileList(num *big.Int) ([]string, error) {
+	return _Ipfs.Contract.GetFileList(&_Ipfs.CallOpts, num)
+}
+
+// GetFileList is a free data retrieval call binding the contract method 0x31260d1e.
+//
+// Solidity: function getFileList(uint256 num) view returns(string[])
+func (_Ipfs *IpfsCallerSession) GetFileList(num *big.Int) ([]string, error) {
+	return _Ipfs.Contract.GetFileList(&_Ipfs.CallOpts, num)
 }
 
 // GetPeerByPid is a free data retrieval call binding the contract method 0xfd993f96.
