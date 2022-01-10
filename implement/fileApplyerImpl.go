@@ -2,7 +2,6 @@ package implement
 
 import (
 	"github.com/ipfs/go-ipfs-auth/standard/model"
-	"math/big"
 )
 
 func (a *peerImpl) ApplyLocal(cid string) error {
@@ -25,8 +24,4 @@ func (a *peerImpl) GetFile(cid string) (*model.IpfsFile, error) {
 		ExpireBlock: file.ExpireBlock.Uint64(),
 	}
 	return &ipfsFile, nil
-}
-
-func (a *peerImpl) GetFileList(n int64) ([]string, error) {
-	return a.ipfsContract.GetFileList(nil, big.NewInt(n))
 }

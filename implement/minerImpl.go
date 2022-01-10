@@ -10,6 +10,7 @@ import (
 	"github.com/ipfs/go-ipfs-auth/standard/model"
 	"github.com/ipfs/go-ipfs-auth/standard/standardConst"
 	"io/ioutil"
+	"math/big"
 	"net/http"
 	"strings"
 )
@@ -94,4 +95,8 @@ func (a *peerImpl) Heartbeat() error {
 		return contract.PeerHeartbeat(opts, uid)
 	}
 	return a.ExecuteIpfsTransact(ctx, f)
+}
+
+func (a *peerImpl) GetFileList(n int64) ([]string, error) {
+	return a.ipfsContract.GetFileList(nil, big.NewInt(n))
 }
