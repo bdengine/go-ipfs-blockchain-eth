@@ -15,8 +15,8 @@ import (
 	"strings"
 )
 
-func (a *peerImpl) GetChallenge() (string, error) {
-	challenge, _, err := a.tokenContract.GetChallenge(nil)
+func (p *peerImpl) GetChallenge() (string, error) {
+	challenge, _, err := p.tokenContract.GetChallenge(nil)
 	if challenge == "" {
 		return challenge, standardConst.ChallengeError
 	}
@@ -30,15 +30,15 @@ type miningResponse struct {
 	Success bool        `json:"success,omitempty"`
 }
 
-func (a *peerImpl) Mining(m model.IpfsMining) error {
+func (p *peerImpl) Mining(m model.IpfsMining) error {
 	if m.Address == "" {
-		m.Address = a.address.String()
+		m.Address = p.address.String()
 	}
 	marshal, err := json.Marshal(m)
 	if err != nil {
 		return err
 	}
-	res, err := sendRequest(string(marshal), a.CentralServerUrl)
+	res, err := sendRequest(string(marshal), p.CentralServerUrl)
 	if err != nil {
 		return err
 	}
@@ -74,9 +74,9 @@ func sendRequest(body string, url string) ([]byte, error) {
 	return b, nil
 }
 
-func (a *peerImpl) UpdateAddress(addrList []string) error {
+func (p *peerImpl) UpdateAddress(addrList []string) error {
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		peer, err := a.ipfsContract.AddrPeerMap(nil, a.address)
+		peer, err := p.ipfsContract.AddrPeerMap(nil, p.address)
 		if err != nil {
 			return nil, err
 		}
@@ -85,18 +85,18 @@ func (a *peerImpl) UpdateAddress(addrList []string) error {
 		}
 		return contract.UpdateAddress(opts, uid, addrList)
 	}
-	return a.ExecuteIpfsTransact(context.Background(), f)
+	return p.ExecuteIpfsTransact(context.Background(), f)
 }
 
-func (a *peerImpl) Heartbeat() error {
+func (p *peerImpl) Heartbeat() error {
 	ctx := context.Background()
 
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 		return contract.PeerHeartbeat(opts, uid)
 	}
-	return a.ExecuteIpfsTransact(ctx, f)
+	return p.ExecuteIpfsTransact(ctx, f)
 }
 
-func (a *peerImpl) GetFileList(n int64) ([]string, error) {
-	return a.ipfsContract.GetFileList(nil, big.NewInt(n))
+func (p *peerImpl) GetFileList(n int64) ([]string, error) {
+	return p.ipfsContract.GetFileList(nil, big.NewInt(n))
 }

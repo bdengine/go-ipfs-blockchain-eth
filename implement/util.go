@@ -23,12 +23,12 @@ const (
 type ExecuteIpfsFunc func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error)
 
 // GenTransactOpts 生成默认交易配置项
-func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, gasLimit uint64) (*bind.TransactOpts, error) {
-	opts, err := bind.NewKeyedTransactorWithChainID(a.priKey, a.chainId)
+func (p *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, gasLimit uint64) (*bind.TransactOpts, error) {
+	opts, err := bind.NewKeyedTransactorWithChainID(p.priKey, p.chainId)
 	if err != nil {
 		return nil, err
 	}
-	nonce, err := sCli.PendingNonceAt(ctx, a.address)
+	nonce, err := sCli.PendingNonceAt(ctx, p.address)
 	if err != nil {
 		return nil, err
 	}
@@ -48,35 +48,35 @@ func (a *peerImpl) GenTransactOpts(ctx context.Context, sCli *ethclient.Client, 
 }
 
 // ExecuteIpfsTransact 执行交易,等待返回成功与否
-func (a *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) error {
+func (p *peerImpl) ExecuteIpfsTransact(ctx context.Context, f ExecuteIpfsFunc) error {
 	// 获取客户端和合约实例
 	uid := uuid.New().String()
 	sch := make(chan *ipfs.IpfsSuccess)
-	sub, err := a.ipfsContract.IpfsFilterer.WatchSuccess(nil, sch, []string{uid})
+	sub, err := p.ipfsContract.IpfsFilterer.WatchSuccess(nil, sch, []string{uid})
 	if err != nil {
 		return err
 	}
 	defer sub.Unsubscribe()
-	tx, err := a.syncExecuteIpfsContract(ctx, f, uid)
+	tx, err := p.syncExecuteIpfsContract(ctx, f, uid)
 	if err != nil {
 		return err
 	}
-	ctx, _ = context.WithTimeout(ctx, a.Variable.RequestTimeout*time.Second)
+	ctx, _ = context.WithTimeout(ctx, p.Variable.RequestTimeout*time.Second)
 	// todo 日志
 	log.Debugf("%v交易结果查询：", tx.Hash())
-	return waitResult(ctx, a.socketClient, sch, sub, tx.Hash(), uid)
+	return waitResult(ctx, p.socketClient, sch, sub, tx.Hash(), uid)
 }
 
-func (a *peerImpl) syncExecuteIpfsContract(ctx context.Context, f ExecuteIpfsFunc, uid string) (*types.Transaction, error) {
-	a.lock.Lock()
-	defer a.lock.Unlock()
+func (p *peerImpl) syncExecuteIpfsContract(ctx context.Context, f ExecuteIpfsFunc, uid string) (*types.Transaction, error) {
+	p.lock.Lock()
+	defer p.lock.Unlock()
 	// 生成配置项
-	opts, err := a.GenTransactOpts(ctx, a.socketClient, a.config.Variable.GasLimit)
+	opts, err := p.GenTransactOpts(ctx, p.socketClient, p.config.Variable.GasLimit)
 	if err != nil {
 		return nil, err
 	}
 	// 执行交易方法
-	return f(uid, a.ipfsContract, opts)
+	return f(uid, p.ipfsContract, opts)
 }
 
 func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.IpfsSuccess, sub event.Subscription, txId common.Hash, uid string) error {

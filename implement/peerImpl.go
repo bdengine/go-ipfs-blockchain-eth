@@ -181,10 +181,10 @@ func checkConfig(a *config) error {
 	return nil
 }
 
-func (a *peerImpl) InitPeer(peer model.CorePeer) error {
+func (p *peerImpl) InitPeer(peer model.CorePeer) error {
 	ctx := context.Background()
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		p, err := contract.AddrPeerMap(nil, a.address)
+		p, err := contract.AddrPeerMap(nil, p.address)
 		if err != nil {
 			return nil, err
 		}
@@ -194,32 +194,32 @@ func (a *peerImpl) InitPeer(peer model.CorePeer) error {
 		return contract.AddPeer(opts, uid, peer.PeerId, peer.Addresses)
 	}
 	// 执行交易
-	return a.ExecuteIpfsTransact(ctx, f)
+	return p.ExecuteIpfsTransact(ctx, f)
 }
 
-func (a *peerImpl) RemovePeer() error {
+func (p *peerImpl) RemovePeer() error {
 	ctx := context.Background()
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
 		return contract.RemovePeer(opts, uid)
 	}
 	// 执行交易
-	return a.ExecuteIpfsTransact(ctx, f)
+	return p.ExecuteIpfsTransact(ctx, f)
 }
 
-func (a *peerImpl) DaemonPeer() error {
+func (p *peerImpl) DaemonPeer() error {
 	return nil
 }
 
-func (a *peerImpl) GetSocketClient() (*ethclient.Client, error) {
-	if a.socketClient == nil {
+func (p *peerImpl) GetSocketClient() (*ethclient.Client, error) {
+	if p.socketClient == nil {
 		return nil, fmt.Errorf("nil client")
 	}
-	return a.socketClient, nil
+	return p.socketClient, nil
 }
 
-func (a *peerImpl) GetHttpClient() (*ethclient.Client, error) {
-	if a.httpClient == nil {
+func (p *peerImpl) GetHttpClient() (*ethclient.Client, error) {
+	if p.httpClient == nil {
 		return nil, fmt.Errorf("nil client")
 	}
-	return a.httpClient, nil
+	return p.httpClient, nil
 }

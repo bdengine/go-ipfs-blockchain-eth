@@ -11,7 +11,7 @@ import (
 	"math/big"
 )
 
-func (a *peerImpl) AddFile(info model.IpfsFileInfo) error {
+func (p *peerImpl) AddFile(info model.IpfsFileInfo) error {
 	ctx := context.Background()
 
 	blockNum := big.NewInt(info.StoreDays * 24 * 60 * 60)
@@ -26,7 +26,7 @@ func (a *peerImpl) AddFile(info model.IpfsFileInfo) error {
 		}
 		var owner common.Address
 		if info.Owner == "self" || info.Owner == "" {
-			owner = a.address
+			owner = p.address
 		} else {
 			owner = common.HexToAddress(info.Owner)
 		}
@@ -35,10 +35,10 @@ func (a *peerImpl) AddFile(info model.IpfsFileInfo) error {
 	}
 
 	// 执行交易
-	return a.ExecuteIpfsTransact(ctx, f)
+	return p.ExecuteIpfsTransact(ctx, f)
 }
 
-func (a *peerImpl) DeleteFile(cid string) error {
+func (p *peerImpl) DeleteFile(cid string) error {
 	ctx := context.Background()
 
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
@@ -52,10 +52,10 @@ func (a *peerImpl) DeleteFile(cid string) error {
 		return contract.RemoveFile(opts, uid, cid)
 	}
 	// 执行交易
-	return a.ExecuteIpfsTransact(ctx, f)
+	return p.ExecuteIpfsTransact(ctx, f)
 }
 
-func (a *peerImpl) RechargeFile(cid string, days int64) error {
+func (p *peerImpl) RechargeFile(cid string, days int64) error {
 	ctx := context.Background()
 	blockNum := big.NewInt(days * 24 * 60 * 60)
 
@@ -72,5 +72,5 @@ func (a *peerImpl) RechargeFile(cid string, days int64) error {
 	}
 
 	// 执行交易
-	return a.ExecuteIpfsTransact(ctx, rechargeFunc)
+	return p.ExecuteIpfsTransact(ctx, rechargeFunc)
 }

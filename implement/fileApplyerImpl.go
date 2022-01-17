@@ -4,16 +4,16 @@ import (
 	"github.com/ipfs/go-ipfs-auth/standard/model"
 )
 
-func (a *peerImpl) ApplyLocal(cid string) error {
+func (p *peerImpl) ApplyLocal(cid string) error {
 	return nil
 }
 
-func (a *peerImpl) ApplyRemote(cid string) error {
+func (p *peerImpl) ApplyRemote(cid string) error {
 	return nil
 }
 
-func (a *peerImpl) GetFile(cid string) (*model.IpfsFile, error) {
-	file, err := a.ipfsContract.GetFile(nil, cid)
+func (p *peerImpl) GetFile(cid string) (*model.IpfsFile, error) {
+	file, err := p.ipfsContract.GetFile(nil, cid)
 	if err != nil {
 		return nil, err
 	}

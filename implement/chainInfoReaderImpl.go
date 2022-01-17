@@ -5,8 +5,8 @@ import (
 	"math/big"
 )
 
-func (a *peerImpl) GetPeerList(num int) ([]model.CorePeer, error) {
-	list, err := a.ipfsContract.GetPeerList(nil, big.NewInt(int64(num)))
+func (p *peerImpl) GetPeerList(num int) ([]model.CorePeer, error) {
+	list, err := p.ipfsContract.GetPeerList(nil, big.NewInt(int64(num)))
 	if err != nil {
 		return nil, err
 	}
@@ -20,13 +20,13 @@ func (a *peerImpl) GetPeerList(num int) ([]model.CorePeer, error) {
 	return res, nil
 }
 
-func (a *peerImpl) GetUserCode() (string, error) {
-	return a.address.String(), nil
+func (p *peerImpl) GetUserCode() (string, error) {
+	return p.address.String(), nil
 }
 
-func (a *peerImpl) GetPeer(id string) (model.CorePeer, error) {
+func (p *peerImpl) GetPeer(id string) (model.CorePeer, error) {
 	res := model.CorePeer{PeerId: id}
-	peer, err := a.ipfsContract.GetPeerByPid(nil, id)
+	peer, err := p.ipfsContract.GetPeerByPid(nil, id)
 	if err != nil {
 		return res, err
 	}
