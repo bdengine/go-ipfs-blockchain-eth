@@ -9,7 +9,6 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/event"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-ipfs-auth/auth-source-eth/contract/ipfs"
 	"github.com/prometheus/common/log"
 	"math/big"
 	"time"

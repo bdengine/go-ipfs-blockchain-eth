@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/auth-source-eth.iml" filepath="$PROJECT_DIR$/.idea/auth-source-eth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/go-ipfs-blockchain-eth.iml" filepath="$PROJECT_DIR$/.idea/go-ipfs-blockchain-eth.iml" />
     </modules>
   </component>
 </project>

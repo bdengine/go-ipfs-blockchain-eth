@@ -1,7 +1,7 @@
 package implement
 
 import (
-	"github.com/ipfs/go-ipfs-auth/standard/model"
+	"github.com/bdengine/go-ipfs-blockchain-standard/model"
 	"math/big"
 )
 

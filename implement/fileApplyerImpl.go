@@ -1,7 +1,6 @@
 package implement
 
 import (
-	"github.com/ipfs/go-ipfs-auth/standard/model"
 )
 
 func (p *peerImpl) ApplyLocal(cid string) error {

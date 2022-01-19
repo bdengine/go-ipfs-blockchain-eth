@@ -1,12 +1,12 @@
-module github.com/ipfs/go-ipfs-auth/auth-source-eth
+module github.com/bdengine/go-ipfs-blockchain-eth
 
 go 1.15
 
 require (
 	github.com/ethereum/go-ethereum v1.10.13
 	github.com/google/uuid v1.1.5
-	github.com/ipfs/go-ipfs-auth/standard v0.0.0
+	github.com/bdengine/go-ipfs-blockchain-standard v0.0.0
 	github.com/prometheus/common v0.6.0
 )
 
-replace github.com/ipfs/go-ipfs-auth/standard => ../standard
+replace github.com/bdengine/go-ipfs-blockchain-standard => ../go-ipfs-blockchain-standard
