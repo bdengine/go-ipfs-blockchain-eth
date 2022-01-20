@@ -1,6 +1,7 @@
 package implement
 
 import (
+	"github.com/bdengine/go-ipfs-blockchain-standard/model"
 )
 
 func (p *peerImpl) ApplyLocal(cid string) error {

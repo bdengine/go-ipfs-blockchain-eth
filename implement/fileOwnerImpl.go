@@ -3,6 +3,8 @@ package implement
 import (
 	"context"
 	"fmt"
+	"github.com/bdengine/go-ipfs-blockchain-eth/contract/ipfs"
+	"github.com/bdengine/go-ipfs-blockchain-standard/model"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
