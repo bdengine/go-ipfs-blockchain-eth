@@ -12,6 +12,7 @@ contract IPFS {
     struct Authority {
         // 文件拥有者,文件存储付费者
         address owner;
+        uint256 sliceNum;
         uint256 size;
         uint256 expireBlock;
         // 上传文件的节点的链上身份,可以和owner相同
@@ -195,7 +196,7 @@ contract IPFS {
 
 
 
-    function addFile(string calldata uid, string calldata cid, uint256 size, uint256 blockNum, address _owner) FileNotExist(cid) external {
+    function addFile(string calldata uid, string calldata cid, uint256 sliceNum ,uint256 size, uint256 blockNum, address _owner) FileNotExist(cid) external {
         require(blockNum > 0, "require blockNum > 0");
         require(size > 0, "require size > 0");
         uint256 wad = blockNum * price * size;
@@ -206,7 +207,7 @@ contract IPFS {
 
         uint256 _expire = block.number + blockNum;
 
-        fileStore.fileMap[cid] = Authority(_owner, size, _expire, msg.sender,fileStore.fileList.length);
+        fileStore.fileMap[cid] = Authority(_owner, sliceNum,size, _expire, msg.sender,fileStore.fileList.length);
         fileStore.fileList.push(cid);
 
         emit Success(uid);
@@ -252,6 +253,17 @@ contract IPFS {
 
     function getFile(string calldata cid) view external returns (Authority memory){
         return fileStore.fileMap[cid];
+    }
+
+    function getFileStatistic() view external returns (uint256,uint256){
+        uint256 num = fileStore.fileList.length;
+        uint256 size = 0;
+        uint256 sliceNum = 0;
+        for (uint i = 0; i < num; i++) {
+            size += fileStore.fileMap[fileStore.fileList[i]].size;
+            sliceNum += fileStore.fileMap[fileStore.fileList[i]].sliceNum;
+        }
+        return (size,sliceNum);
     }
 
     function getFileList(uint256 num)view external returns (string[] memory){

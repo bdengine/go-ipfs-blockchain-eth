@@ -9,4 +9,4 @@ require (
 	github.com/prometheus/common v0.6.0
 )
 
-//replace github.com/bdengine/go-ipfs-blockchain-standard => ../go-ipfs-blockchain-standard
+replace github.com/bdengine/go-ipfs-blockchain-standard => ../go-ipfs-blockchain-standard

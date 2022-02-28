@@ -16,13 +16,12 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"io/ioutil"
 	"math/big"
-	"os"
 	"sync"
 	"time"
 )
 
 const (
-	configFileName = "/cosmosConfig"
+	ConfigFileName = "/cosmosConfig"
 	contractIpfs   = "ipfs"
 	contractToken  = "token"
 	defaultTimeout = 30
@@ -74,9 +73,34 @@ type peerImpl struct {
 	httpClient *ethclient.Client
 }
 
+func NewConfig(httpUrl, socketUrl, centralServerUrl, ipfsAddr, tokenAddr, priKey string, chainID int64, timeout time.Duration, gasLimit uint64) (*config, error) {
+	if timeout == 0 {
+		timeout = defaultTimeout
+	}
+	if gasLimit == 0 {
+		gasLimit = defaultGasLimit
+	}
+	// todo 检查必要的参数和格式
+
+	return &config{
+		Client: clientInfo{
+			HttpUrl:   httpUrl,
+			SocketUrl: socketUrl,
+		},
+		CentralServerUrl: centralServerUrl,
+		ContractMap:      map[string]contractInfo{contractIpfs: {ipfsAddr}, contractToken: {tokenAddr}},
+		Chain:            chainInfo{ChainId: chainID},
+		Variable: configInfo{
+			RequestTimeout: timeout * time.Second,
+			GasLimit:       gasLimit,
+		},
+		ID: Identity{PriKey: priKey},
+	}, nil
+}
+
 // NewApi 初始化一个peerImpl实例
 func NewApi(configRoot string, peerId string) (*peerImpl, error) {
-	fileName := configRoot + configFileName
+	fileName := configRoot + ConfigFileName
 	readFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return nil, err
@@ -114,10 +138,6 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	if cfg.ID.Pid != peerId {
 		cfg.ID.Pid = peerId
 		marshal, err := json.MarshalIndent(cfg, "", "\t")
-		if err != nil {
-			return nil, err
-		}
-		err = os.Remove(fileName)
 		if err != nil {
 			return nil, err
 		}

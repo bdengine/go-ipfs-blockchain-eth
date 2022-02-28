@@ -80,7 +80,10 @@ func (p *peerImpl) syncExecuteIpfsContract(ctx context.Context, f ExecuteIpfsFun
 }
 
 func waitResult(ctx context.Context, sCli *ethclient.Client, sch chan *ipfs.IpfsSuccess, sub event.Subscription, txId common.Hash, uid string) error {
-	tick := time.Tick(2 * time.Second)
+	ticker := time.NewTicker(2 * time.Second)
+	tick := ticker.C
+	// 未调用stop()的time.Ticker会造成内存泄露
+	defer ticker.Stop()
 	var err error
 	for {
 		select {

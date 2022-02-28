@@ -31,7 +31,7 @@ func (p *peerImpl) AddFile(info model.IpfsFileInfo) error {
 			owner = common.HexToAddress(info.Owner)
 		}
 		// todo 检查balance和代扣额度
-		return contract.AddFile(opts, uid, info.Cid, big.NewInt(info.Size), blockNum, owner)
+		return contract.AddFile(opts, uid, info.Cid, big.NewInt(info.Size), big.NewInt(info.SliceNum), blockNum, owner)
 	}
 
 	// 执行交易

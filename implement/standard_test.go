@@ -36,15 +36,15 @@ func TestNewApi(t *testing.T) {
 var mockPeer *peerImpl = &peerImpl{
 	config: &config{
 		Client: clientInfo{
-			HttpUrl:   "http://39.108.194.46:8545",
-			SocketUrl: "ws://39.108.194.46:8546",
+			HttpUrl:   "http://192.168.80.113:9545",
+			SocketUrl: "ws://192.168.80.113:9546",
 		},
 		CentralServerUrl: "",
 		ContractMap: map[string]contractInfo{
-			"ipfs":  {"0xf3Feb930E9f459Ee669D88363985cBDe259abADD"},
-			"token": {"0x22C43DBe403F1C60ee4e2c437D33e151E20Db22F"},
+			"ipfs":  {"0x455b97Df329DF0D4bE6b02b23Cf1002C998A5cD6"},
+			"token": {"0xF6f682C3d4362A0cE1b5F2B9C381fd0fFe9D7959"},
 		},
-		Chain: chainInfo{ChainId: 18888},
+		Chain: chainInfo{ChainId: 20180518},
 		Variable: configInfo{
 			RequestTimeout: 30,
 			GasLimit:       250000,
