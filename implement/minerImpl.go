@@ -16,7 +16,21 @@ import (
 )
 
 func (p *peerImpl) GetChallenge() (string, error) {
-	challenge, _, err := p.tokenContract.GetChallenge(nil)
+	challenge, _, err := p.ipfsContract.GetChallenge(nil)
+	if err != nil {
+		return "", err
+	}
+	if challenge == "" {
+		return challenge, standardConst.ChallengeError
+	}
+	return challenge, err
+}
+
+func (p *peerImpl) GetStoreChallenge() (string, error) {
+	challenge, _, err := p.ipfsContract.GetStoreChallenge(nil)
+	if err != nil {
+		return "", err
+	}
 	if challenge == "" {
 		return challenge, standardConst.ChallengeError
 	}
@@ -76,13 +90,13 @@ func sendRequest(body string, url string) ([]byte, error) {
 
 func (p *peerImpl) UpdateAddress(addrList []string) error {
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		peer, err := p.ipfsContract.AddrPeerMap(nil, p.address)
+		/*peer, err := p.ipfsContract.AddrPeerMap(nil, p.address)
 		if err != nil {
 			return nil, err
 		}
 		if !peer.Valid {
 			return nil, fmt.Errorf("节点不存在")
-		}
+		}*/
 		return contract.UpdateAddress(opts, uid, addrList)
 	}
 	return p.ExecuteIpfsTransact(context.Background(), f)
@@ -99,4 +113,12 @@ func (p *peerImpl) Heartbeat() error {
 
 func (p *peerImpl) GetFileList(n int64) ([]string, error) {
 	return p.ipfsContract.GetFileList(nil, big.NewInt(n))
+}
+
+func (p *peerImpl) GetChallengeStage() (int64, string, int64, error) {
+	stage, s, b, err := p.ipfsContract.GetChallengeStage(nil)
+	if err != nil {
+		return 0, "", 0, err
+	}
+	return stage.Int64(), s, b.Int64(), nil
 }

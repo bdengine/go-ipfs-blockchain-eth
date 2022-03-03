@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdengine/go-ipfs-blockchain-eth/contract/ipfs"
-	"github.com/bdengine/go-ipfs-blockchain-eth/contract/scToken"
 	"github.com/bdengine/go-ipfs-blockchain-standard/model"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -66,14 +65,13 @@ type peerImpl struct {
 	chainId *big.Int
 	lock    sync.Locker
 
-	socketClient  *ethclient.Client
-	ipfsContract  *ipfs.Ipfs
-	tokenContract *scToken.ScToken
+	socketClient *ethclient.Client
+	ipfsContract *ipfs.Ipfs
 
 	httpClient *ethclient.Client
 }
 
-func NewConfig(httpUrl, socketUrl, centralServerUrl, ipfsAddr, tokenAddr, priKey string, chainID int64, timeout time.Duration, gasLimit uint64) (*config, error) {
+func NewConfig(httpUrl, socketUrl, centralServerUrl, ipfsAddr, priKey string, chainID int64, timeout time.Duration, gasLimit uint64) (*config, error) {
 	if timeout == 0 {
 		timeout = defaultTimeout
 	}
@@ -88,7 +86,7 @@ func NewConfig(httpUrl, socketUrl, centralServerUrl, ipfsAddr, tokenAddr, priKey
 			SocketUrl: socketUrl,
 		},
 		CentralServerUrl: centralServerUrl,
-		ContractMap:      map[string]contractInfo{contractIpfs: {ipfsAddr}, contractToken: {tokenAddr}},
+		ContractMap:      map[string]contractInfo{contractIpfs: {ipfsAddr}},
 		Chain:            chainInfo{ChainId: chainID},
 		Variable: configInfo{
 			RequestTimeout: timeout * time.Second,
@@ -167,11 +165,6 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 		return nil, err
 	}
 	a.ipfsContract = ipfsContra
-	tokenContra, err := scToken.NewScToken(common.HexToAddress(a.ContractMap[contractToken].ContractAddr), socketClient)
-	if err != nil {
-		return nil, err
-	}
-	a.tokenContract = tokenContra
 	return &a, err
 }
 
@@ -180,7 +173,7 @@ func checkConfig(a *config) error {
 		return fmt.Errorf("配置文件Client信息不完整")
 	}
 
-	if a.ContractMap[contractIpfs].ContractAddr == "" || a.ContractMap[contractToken].ContractAddr == "" {
+	if a.ContractMap[contractIpfs].ContractAddr == "" {
 		return fmt.Errorf("配置文件ContractMap不完整")
 	}
 
@@ -204,13 +197,13 @@ func checkConfig(a *config) error {
 func (p *peerImpl) InitPeer(peer model.CorePeer) error {
 	ctx := context.Background()
 	var f ExecuteIpfsFunc = func(uid string, contract *ipfs.Ipfs, opts *bind.TransactOpts) (*types.Transaction, error) {
-		p, err := contract.AddrPeerMap(nil, p.address)
+		/*p, err := contract.AddrPeerMap(nil, p.address)
 		if err != nil {
 			return nil, err
 		}
 		if p.Valid {
 			return nil, fmt.Errorf("节点存在")
-		}
+		}*/
 		return contract.AddPeer(opts, uid, peer.PeerId, peer.Addresses)
 	}
 	// 执行交易

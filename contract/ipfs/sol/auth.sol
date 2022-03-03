@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity >=0.4.23;
+pragma solidity >=0.8.0;
 
 interface DSAuthority {
     function canCall(
@@ -29,7 +29,7 @@ contract DSAuth is DSAuthEvents {
     DSAuthority  public  authority;
     address      public  owner;
 
-    constructor() public {
+    constructor()  {
         owner = msg.sender;
         emit LogSetOwner(msg.sender);
     }

@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdengine/go-ipfs-blockchain-eth/contract/ipfs"
-	"github.com/bdengine/go-ipfs-blockchain-eth/contract/scToken"
 	"github.com/bdengine/go-ipfs-blockchain-standard/model"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -54,14 +53,13 @@ var mockPeer *peerImpl = &peerImpl{
 			PriKey: "3db74108afca5195374fd6ebdcfcdcd4ccc4338d4a70a8da36f693c995345e7e",
 		},
 	},
-	priKey:        nil,
-	address:       common.Address{},
-	chainId:       nil,
-	lock:          nil,
-	socketClient:  nil,
-	ipfsContract:  nil,
-	tokenContract: nil,
-	httpClient:    nil,
+	priKey:       nil,
+	address:      common.Address{},
+	chainId:      nil,
+	lock:         nil,
+	socketClient: nil,
+	ipfsContract: nil,
+	httpClient:   nil,
 }
 
 func init() {
@@ -83,11 +81,6 @@ func init() {
 		panic(err)
 	}
 	mockPeer.ipfsContract = ipfsContra
-	tokenContra, err := scToken.NewScToken(common.HexToAddress(mockPeer.ContractMap[contractToken].ContractAddr), socketClient)
-	if err != nil {
-		panic(err)
-	}
-	mockPeer.tokenContract = tokenContra
 	mockPeer.chainId = big.NewInt(mockPeer.Chain.ChainId)
 	priKey, err := crypto.HexToECDSA(mockPeer.ID.PriKey)
 	if err != nil {
