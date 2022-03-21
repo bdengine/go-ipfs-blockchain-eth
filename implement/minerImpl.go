@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdengine/go-ipfs-blockchain-eth/contract/ipfs"
-	"github.com/bdengine/go-ipfs-blockchain-standard/model"
+	"github.com/bdengine/go-ipfs-blockchain-standard/dto"
 	"github.com/bdengine/go-ipfs-blockchain-standard/standardConst"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -37,14 +37,7 @@ func (p *peerImpl) GetStoreChallenge() (string, error) {
 	return challenge, err
 }
 
-type miningResponse struct {
-	Code    int         `json:"code,omitempty"`
-	Data    interface{} `json:"data,omitempty"`
-	Message string      `json:"message,omitempty"`
-	Success bool        `json:"success,omitempty"`
-}
-
-func (p *peerImpl) Mining(m model.IpfsMining) error {
+func (p *peerImpl) Mining(m dto.MiningDTO) error {
 	if m.Address == "" {
 		m.Address = p.address.String()
 	}
@@ -52,16 +45,59 @@ func (p *peerImpl) Mining(m model.IpfsMining) error {
 	if err != nil {
 		return err
 	}
-	res, err := sendRequest(string(marshal), p.CentralServerUrl)
+	res, err := sendRequest(string(marshal), p.CentralServerUrl+standardConst.UrlMining)
 	if err != nil {
 		return err
 	}
-	var r miningResponse
+	var r dto.ResultDTO
 	err = json.Unmarshal(res, &r)
 	if err != nil {
 		return err
 	}
-	if !r.Success {
+	if r.Code != dto.CodeSuccess {
+		return fmt.Errorf(r.Message)
+	}
+	return nil
+}
+
+func (p *peerImpl) UpdateOrGen(m dto.StoreProofDTO) error {
+	if m.PeerAddress == "" {
+		m.PeerAddress = p.address.String()
+	}
+	marshal, err := json.Marshal(m)
+	if err != nil {
+		return err
+	}
+	res, err := sendRequest(string(marshal), p.CentralServerUrl+standardConst.UrlUpdateOrGen)
+	if err != nil {
+		return err
+	}
+	var r dto.ResultDTO
+	err = json.Unmarshal(res, &r)
+	if err != nil {
+		return err
+	}
+	if r.Code != dto.CodeSuccess {
+		return fmt.Errorf(r.Message)
+	}
+	return nil
+}
+
+func (p *peerImpl) Prove(m dto.SVProofDTO) error {
+	marshal, err := json.Marshal(m)
+	if err != nil {
+		return err
+	}
+	res, err := sendRequest(string(marshal), p.CentralServerUrl+standardConst.UrlProve)
+	if err != nil {
+		return err
+	}
+	var r dto.ResultDTO
+	err = json.Unmarshal(res, &r)
+	if err != nil {
+		return err
+	}
+	if r.Code != dto.CodeSuccess {
 		return fmt.Errorf(r.Message)
 	}
 	return nil
@@ -119,6 +155,9 @@ func (p *peerImpl) GetChallengeStage() (int64, string, int64, error) {
 	stage, s, b, err := p.ipfsContract.GetChallengeStage(nil)
 	if err != nil {
 		return 0, "", 0, err
+	}
+	if s == "" {
+		return 0, "", 0, fmt.Errorf("激励服务未发布对应值,请稍候")
 	}
 	return stage.Int64(), s, b.Int64(), nil
 }

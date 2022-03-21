@@ -40,8 +40,7 @@ var mockPeer *peerImpl = &peerImpl{
 		},
 		CentralServerUrl: "",
 		ContractMap: map[string]contractInfo{
-			"ipfs":  {"0x455b97Df329DF0D4bE6b02b23Cf1002C998A5cD6"},
-			"token": {"0xF6f682C3d4362A0cE1b5F2B9C381fd0fFe9D7959"},
+			"ipfs":  {"0x5E69BbE6e8Dc5ADB622d2DB91a509B9165F1f21C"},
 		},
 		Chain: chainInfo{ChainId: 20180518},
 		Variable: configInfo{
@@ -231,8 +230,8 @@ func TestDefaultConfig(t *testing.T) {
 
 }
 
-func TestPeerImpl_Mining(t *testing.T) {
-	mining := model.IpfsMining{
+/*func TestPeerImpl_Mining(t *testing.T) {
+	mining := dto.MiningDTO{
 		Cid:         "testCid",
 		Hash:        "testHash",
 		Address:     "testAddr",
@@ -243,7 +242,7 @@ func TestPeerImpl_Mining(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-}
+}*/
 
 func TestPeerImpl_GetChallenge(t *testing.T) {
 	challenge, err := mockPeer.GetChallenge()
@@ -293,3 +292,5 @@ func TestCommon(t *testing.T) {
 	prefixLen := CommonPrefixLen(decodeString, bytes)
 	fmt.Println(prefixLen)
 }
+
+

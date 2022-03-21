@@ -13,6 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/prometheus/common/log"
 	"io/ioutil"
 	"math/big"
 	"sync"
@@ -56,6 +57,7 @@ type config struct {
 	Chain            chainInfo
 	Variable         configInfo
 	ID               Identity
+	AnnounceAddress  []string
 }
 
 type peerImpl struct {
@@ -69,6 +71,9 @@ type peerImpl struct {
 	ipfsContract *ipfs.Ipfs
 
 	httpClient *ethclient.Client
+
+	transHahCh chan common.Hash
+	txResultRegister sync.Map
 }
 
 func NewConfig(httpUrl, socketUrl, centralServerUrl, ipfsAddr, priKey string, chainID int64, timeout time.Duration, gasLimit uint64) (*config, error) {
@@ -113,7 +118,6 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	// 检查配置项是否完整
 	err = checkConfig(&cfg)
 	if err != nil {
-		panic(err)
 		return nil, err
 	}
 
@@ -151,20 +155,25 @@ func NewApi(configRoot string, peerId string) (*peerImpl, error) {
 	if err != nil {
 		return nil, err
 	}
-	socketClient, err := ethclient.Dial(a.Client.SocketUrl)
+	/*socketClient, err := ethclient.Dial(a.Client.SocketUrl)
 	if err != nil {
 		return nil, err
 	}
 
-	a.socketClient = socketClient
+	a.socketClient = socketClient*/
 	a.httpClient = httpClient
 	a.lock = &sync.Mutex{}
 
-	ipfsContra, err := ipfs.NewIpfs(common.HexToAddress(a.ContractMap[contractIpfs].ContractAddr), socketClient)
+	ipfsContra, err := ipfs.NewIpfs(common.HexToAddress(a.ContractMap[contractIpfs].ContractAddr), httpClient)
 	if err != nil {
 		return nil, err
 	}
 	a.ipfsContract = ipfsContra
+
+	a.transHahCh = make(chan common.Hash,20)
+
+	go txResultWork(&a)
+
 	return &a, err
 }
 
@@ -219,9 +228,10 @@ func (p *peerImpl) RemovePeer() error {
 	return p.ExecuteIpfsTransact(ctx, f)
 }
 
-func (p *peerImpl) DaemonPeer() error {
-	return nil
+func (p *peerImpl) DaemonPeer() ([]string,error) {
+	return p.AnnounceAddress,nil
 }
+
 
 func (p *peerImpl) GetSocketClient() (*ethclient.Client, error) {
 	if p.socketClient == nil {
@@ -235,4 +245,36 @@ func (p *peerImpl) GetHttpClient() (*ethclient.Client, error) {
 		return nil, fmt.Errorf("nil client")
 	}
 	return p.httpClient, nil
+}
+
+func txResultWork(server *peerImpl){
+	for  {
+		h := <-server.transHahCh
+		receipt, err := server.httpClient.TransactionReceipt(context.Background(), h)
+		if err != nil {
+			if err.Error() == "not found" {
+				if len(server.transHahCh) == 0 {
+					server.transHahCh<-h
+					time.Sleep(6*time.Second)
+				}
+				continue
+			}
+			log.Errorf("tx: %s 回执查询失败:%v",h.String(),err.Error())
+			if ch,ok:= server.txResultRegister.Load(h.String());ok {
+				c := ch.(chan *types.Receipt)
+				c <- nil
+				server.txResultRegister.Delete(h.String())
+			}
+		}
+		// todo 交易错误处理，当前仅记录
+		if receipt.Status == txStatusFail{
+			log.Warnf("交易：%s失败，回执：%+v",h.String(),receipt)
+		}
+
+		if ch,ok:= server.txResultRegister.Load(h.String());ok {
+			c := ch.(chan *types.Receipt)
+			c <- receipt
+			server.txResultRegister.Delete(h.String())
+		}
+	}
 }
